@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Guard.Library;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,16 +12,17 @@ namespace Guard
         {
             InitializeComponent();
 
-            //Check isset guard file
-            string document = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
-            if (!Directory.Exists(document))
-                Directory.CreateDirectory(document);
+            Page page = new MainPage();
 
-            string[] files = Directory.GetFiles(document, "*.guard");
-            if (files.Length <= 0)
-                Application.Current.MainPage = new FirstLogin();
-            else
-                Application.Current.MainPage = new MainPage();
+            if (IO.Files.Count <= 0)
+                page = new FirstLogin();
+
+            ToPage(page);
+        }
+
+        private void ToPage(Page page)
+        {
+            Application.Current.MainPage = page;
         }
 
         protected override void OnStart()

@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-using SteamAuth;
-using Xamarin.CommunityToolkit.Extensions;
-using System.Threading.Tasks;
-using Guard.CPopup;
-using Newtonsoft.Json;
 using System.IO;
+using SteamAuth;
+using Guard.CPopup;
+using Xamarin.Forms;
+using Guard.Library;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Xamarin.CommunityToolkit.UI.Views;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace Guard
 {
@@ -24,11 +25,7 @@ namespace Guard
 
         async void Login_Clicked(System.Object sender, System.EventArgs e)
         {
-
-
-            NextPage();
-
-
+            //NextPage();
             //Check on empty Entry
             if (Username.Text == null && Password.Text == null)
                 return;
@@ -78,17 +75,11 @@ namespace Guard
                 //Need to add telephone to steam )
                 return;
             }
-            try
-            {
-                var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
-                if (!Directory.Exists(documents))
-                    Directory.CreateDirectory(documents);
-                var file = Path.Combine(documents, linker.LinkedAccount.AccountName + ".guard");
-                string sgFile = JsonConvert.SerializeObject(linker.LinkedAccount, Formatting.Indented);
-                File.WriteAllText(file, sgFile);
-            }
-            catch (Exception ex)
-            {
+
+            var write = IO.AddAndWrite(linker.LinkedAccount.AccountName,
+                JsonConvert.SerializeObject(linker.LinkedAccount, Formatting.Indented));
+
+            if (!write) {
                 Login.IsEnabled = true;
                 return;
             }

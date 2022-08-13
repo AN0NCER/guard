@@ -24,8 +24,10 @@
     <None Remove="Xamarin.CommunityToolkit" />
     <None Remove="SteamAuth" />
     <None Remove="CPopup\" />
+    <None Remove="Library\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CPopup\" />
+    <Folder Include="Library\" />
   </ItemGroup>
 </Project>
