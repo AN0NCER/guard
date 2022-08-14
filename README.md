@@ -10,12 +10,12 @@
 
 ## Functional
 
-- [X] Steam Guard File Generation  
+- [X] Steam Guard File Generation  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [ ] Have unlimited accounts on one device
 - [ ] Ability to export a file
 - [ ] Ability to import a file
-- [X] Steam Guard Code Generation
-- [X] Authorization
+- [X] Steam Guard Code Generation   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Authorization   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [ ] Disable Steam Guard from Steam Account
 - [ ] Acceptance, rejection trade
 
@@ -27,8 +27,8 @@
 
 ## Design
 
-- [X] Page Login
-- [X] Page Guard
+- [X] Page Login   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Page Guard  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [ ] Page Trade
 - [ ] Page Add Account
 
