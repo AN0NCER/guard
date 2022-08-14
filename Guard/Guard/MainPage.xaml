@@ -37,14 +37,14 @@
                     </CarouselView.GestureRecognizers>
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
-                            <Grid >
+                            <Grid>
                                 <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                         <Label Text="Logged in as" FontSize="12" TextColor="#80FFFFFF" />
                                         <Label Text="{Binding AccountName}" FontSize="12" FontAttributes="Bold" TextColor="#80FFFFFF" />
                                     </StackLayout>
                                     <Label Text="{Binding SecretCode, Mode=TwoWay}" HorizontalTextAlignment="Center" TextTransform="Uppercase" TextColor="#fff" FontAttributes="Bold" FontSize="60" />
-                                    <ProgressBar Progress="{Binding ProgressTime, Mode=TwoWay}" />
+                                    <ProgressBar ProgressColor="#3F6CB0" Progress="{Binding ProgressTime, Mode=TwoWay}" />
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>

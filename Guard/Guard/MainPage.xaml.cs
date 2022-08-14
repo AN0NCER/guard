@@ -33,6 +33,7 @@ namespace Guard
             Guards.CollectionChanged += Guards_CollectionChanged;
             ParseGuardFiles();
             BindingContext = this;
+            GuardCarouse.ScrollTo(0, position: ScrollToPosition.MakeVisible);
         }
 
         //If changed Collection Steam Guard
