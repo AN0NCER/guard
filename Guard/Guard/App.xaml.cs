@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Guard.Library;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,8 +12,15 @@ namespace Guard
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            Page page = new MainPage();
+
+            if (IO.Files.Count <= 0)
+                page = new FirstLogin();
+
+            ToPage(page);
         }
+
+        private void ToPage(Page page) => Application.Current.MainPage = page;
 
         protected override void OnStart()
         {

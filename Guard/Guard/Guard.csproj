@@ -11,8 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SteamAuthStandart" Version="1.0.3" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
@@ -21,8 +22,14 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Xamarin.Forms.PancakeView" />
     <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="SteamAuth" />
+    <None Remove="CPopup\" />
+    <None Remove="Library\" />
+    <None Remove="CData\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\steam-auth\SteamAuth\SteamAuth.csproj" />
+    <Folder Include="CPopup\" />
+    <Folder Include="Library\" />
+    <Folder Include="CData\" />
   </ItemGroup>
 </Project>

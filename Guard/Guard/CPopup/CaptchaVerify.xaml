@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<xct:Popup
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Class="Guard.CPopup.CaptchaVerify" Size="340,240" 
+    >
+    <StackLayout Orientation="Vertical" VerticalOptions="Center">
+            <Image x:Name="Captcha" Margin="20,20,20,5" HeightRequest="100" />
+            <Entry x:Name="Code" Placeholder="Captcha" Margin="20,10,20,0" FontSize="14"></Entry>
+            <Button Text="OK" Clicked="Button_Clicked" />
+        </StackLayout>
+</xct:Popup>
+

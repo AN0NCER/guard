@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+    xmlns:local="clr-namespace:Guard"
+    x:Class="Guard.FirstLogin"
+    NavigationPage.HasNavigationBar="False"
+    >
+
+    <Grid>
+        <Grid VerticalOptions="Start">
+            <yummy:PancakeView HeightRequest="356" BackgroundColor="#1C202C" CornerRadius="0,0,50,50">
+                <Grid>
+                    <Image Source="styleLogin.png" HorizontalOptions="End" VerticalOptions="Start" />
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+
+
+                    </StackLayout>
+                </Grid>
+            </yummy:PancakeView>
+        </Grid>
+        <StackLayout Orientation="Vertical">
+            <Image Source="steamLogo.png" Margin="0,55,0,0" WidthRequest="62" HeightRequest="62" />
+            <Label Text="Welcome to Guard!" FontAttributes="Bold" FontSize="24" TextColor="#fff" Margin="0,10" HorizontalOptions="Center" />
+            <Label Text="Use your credentials to login" FontSize="16" TextColor="#fff" Margin="0,0" HorizontalOptions="Center" />
+            <yummy:PancakeView MinimumHeightRequest="150" Margin="20,20,20,10" BackgroundColor="#fff" CornerRadius="15" VerticalOptions="Center" >
+                <yummy:PancakeView.Shadow>
+                    <yummy:DropShadow Color="#000000" Offset="0,2" />
+                </yummy:PancakeView.Shadow>
+                <StackLayout Orientation="Vertical">
+                    <yummy:PancakeView CornerRadius="12" Margin="20, 20, 20, 10">
+                        <local:CustomEntry x:Name="Username" Placeholder="Username" BackgroundColor="#DBE0ED" FontSize="14" HeightRequest="50">
+                            <local:CustomEntry.Keyboard>
+                                <Keyboard x:FactoryMethod="Create">
+                                    <x:Arguments>
+                                        <KeyboardFlags>None</KeyboardFlags>
+                                    </x:Arguments>
+                                </Keyboard>
+                            </local:CustomEntry.Keyboard>
+                        </local:CustomEntry>
+                    </yummy:PancakeView>
+                        <yummy:PancakeView CornerRadius="12" Margin="20,0,20,10">
+                            <local:CustomEntry x:Name="Password" Placeholder="Password" IsPassword="True" BackgroundColor="#DBE0ED" FontSize="14" HeightRequest="50"/>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView CornerRadius="12" Margin="20,0,20,20">
+                            <Button Text="Login" x:Name="Login" Clicked="Login_Clicked" HeightRequest="50" FontSize="14" BackgroundColor="#3F74FF" TextColor="#fff" FontAttributes="Bold" />
+                        </yummy:PancakeView>
+                </StackLayout>
+            </yummy:PancakeView>
+            <Button Text="Forgot your password?" BackgroundColor="Transparent" FontSize="14" TextColor="#000" VerticalOptions="End" Margin="0" />
+        </StackLayout>
+
+
+    </Grid> 
+</ContentPage>
+
