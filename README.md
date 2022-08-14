@@ -1,4 +1,5 @@
 ![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-brightgreen)
+![Pre-Release](https://img.shields.io/github/v/release/AN0NCER/guard?include_prereleases&label=pre-release)
 ![Release](https://img.shields.io/github/v/release/AN0NCER/guard)
 ![Code](https://img.shields.io/github/languages/top/AN0NCER/guard)
 ![Last Commit](https://img.shields.io/github/last-commit/AN0NCER/guard)
