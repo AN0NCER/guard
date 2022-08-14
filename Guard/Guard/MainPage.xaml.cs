@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Threading;
 using SteamAuth;
-using System.Xml.Linq;
 using System.Collections.Specialized;
 
 namespace Guard

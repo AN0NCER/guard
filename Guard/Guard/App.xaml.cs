@@ -20,10 +20,7 @@ namespace Guard
             ToPage(page);
         }
 
-        private void ToPage(Page page)
-        {
-            Application.Current.MainPage = page;
-        }
+        private void ToPage(Page page) => Application.Current.MainPage = page;
 
         protected override void OnStart()
         {

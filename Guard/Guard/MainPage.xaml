@@ -29,7 +29,7 @@
             </yummy:PancakeView.BackgroundGradientStops>
             <Grid>
                 <Image Source="GridBG.png" Aspect="AspectFill" Margin="-40"/>
-                <CarouselView Loop="True" ItemsSource="{Binding Guards}" CurrentItem="{Binding CurGuard}" x:Name="GuardCarouse" CurrentItemChanged="GuardCarouse_CurrentItemChanged"  HorizontalScrollBarVisibility="Never" VerticalOptions="Center" HorizontalOptions="Center">
+                <CarouselView ItemsSource="{Binding Guards}" CurrentItem="{Binding CurGuard}" x:Name="GuardCarouse" CurrentItemChanged="GuardCarouse_CurrentItemChanged"  HorizontalScrollBarVisibility="Never" VerticalOptions="Center" HorizontalOptions="Center">
                     <CarouselView.GestureRecognizers>
                         <TapGestureRecognizer
                             Tapped="TapGestureRecognizer_Tapped"
