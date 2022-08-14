@@ -9,12 +9,12 @@
 
 ## Functional
 
-- [ ] Steam Guard File Generation  
+- [X] Steam Guard File Generation  
 - [ ] Have unlimited accounts on one device
 - [ ] Ability to export a file
 - [ ] Ability to import a file
-- [ ] Steam Guard Code Generation
-- [ ] Authorization
+- [X] Steam Guard Code Generation
+- [X] Authorization
 - [ ] Disable Steam Guard from Steam Account
 - [ ] Acceptance, rejection trade
 
@@ -26,8 +26,8 @@
 
 ## Design
 
-- [ ] Page Login
-- [ ] Page Guard
+- [X] Page Login
+- [X] Page Guard
 - [ ] Page Trade
 - [ ] Page Add Account
 
