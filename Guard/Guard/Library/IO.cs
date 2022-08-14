@@ -58,7 +58,7 @@ namespace Guard.Library
             if (!Directory.Exists(PathGuardFile))
                 Directory.CreateDirectory(PathGuardFile);
 
-            string file = Path.Combine(PathGuardFile, name + ".guard");
+            string file = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
             try
             {
                 File.WriteAllText(file, content);
@@ -73,6 +73,15 @@ namespace Guard.Library
             {
                 return false;
             }
+        }
+
+        public static string GetFileByName(string name)
+        {
+            string fileName = "";
+
+            fileName = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
+
+            return fileName;
         }
     }
 }

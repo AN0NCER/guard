@@ -25,9 +25,11 @@
     <None Remove="SteamAuth" />
     <None Remove="CPopup\" />
     <None Remove="Library\" />
+    <None Remove="CData\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CPopup\" />
     <Folder Include="Library\" />
+    <Folder Include="CData\" />
   </ItemGroup>
 </Project>
