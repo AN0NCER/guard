@@ -10,6 +10,8 @@
 
 ## Functional
 
+<img src="Resorces/iphoneExample.png" align="right" width="300" />
+
 - [X] Steam Guard File Generation  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [ ] Have unlimited accounts on one device
 - [ ] Ability to export a file
