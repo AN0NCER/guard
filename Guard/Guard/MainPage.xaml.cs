@@ -15,6 +15,7 @@ using System.Threading;
 using SteamAuth;
 using System.Collections.Specialized;
 using Xamarin.Forms.Internals;
+using Xamarin.Essentials;
 
 namespace Guard
 {
@@ -56,13 +57,22 @@ namespace Guard
 
             IO.Files.ForEach(x =>
             {
+                //Adding guards list account
                 Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
             });
+
+            new Thread(AddItemViews).Start();
         }
+
+        
 
         //Getting and updating the passcode
         void GuardSecretCode()
         {
+            Dispatcher.BeginInvokeOnMainThread(() =>
+            {
+                CurGuard.ItemView.BackgroundColor = Color.FromHex("#31BCEC");
+            });
             while (true)
             {
                 string s = _guardAccount.GenerateSteamGuardCode();
@@ -114,6 +124,30 @@ namespace Guard
             {
                 Application.Current.MainPage = new FirstLogin();
             }
+        }
+
+        //Add point accounts
+        void AddItemViews()
+        {
+            Guards.ForEach(x =>
+            {
+                ItemViewer.Children.Add(x.ItemView);
+            });
+        }
+
+        //Share Secret File
+        async void ShareFile_Clicked(System.Object sender, System.EventArgs e)
+        {
+            string filePath = IO.GetFileByName(_guardAccount.AccountName);
+
+            if (!File.Exists(filePath))
+                return;
+
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = $"Secret Guard {_guardAccount.AccountName}",
+                File = new ShareFile(filePath)
+            }) ;
         }
     }
 }
