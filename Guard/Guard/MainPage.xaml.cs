@@ -14,6 +14,7 @@ using System.IO;
 using System.Threading;
 using SteamAuth;
 using System.Collections.Specialized;
+using Xamarin.Forms.Internals;
 
 namespace Guard
 {
@@ -53,7 +54,8 @@ namespace Guard
             if (IO.Files.Count <= 0)
                 return; //Exit Program. Somewhere it looks like a bug in the code;
 
-            IO.Files.ForEach(x => {
+            IO.Files.ForEach(x =>
+            {
                 Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
             });
         }
@@ -90,6 +92,28 @@ namespace Guard
         //Copy Guard Code
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
+
+        }
+
+        //Remove Guard Auth
+        void RemAuth_Clicked(System.Object sender, System.EventArgs e)
+        {
+            bool answer = _guardAccount.DeactivateAuthenticator();
+
+            if (!answer)
+                return;
+
+            answer = IO.RemoveFileByName(CurGuard.AccountName);
+
+            if (!answer)
+                return;
+
+            Guards.Remove(CurGuard);
+
+            if(Guards.Count <= 0)
+            {
+                Application.Current.MainPage = new FirstLogin();
+            }
         }
     }
 }

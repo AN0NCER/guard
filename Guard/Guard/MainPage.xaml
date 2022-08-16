@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Guard.MainPage" BackgroundColor="#1C202C"
              NavigationPage.HasNavigationBar="False"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             ios:Page.PrefersStatusBarHidden="True">
     <StackLayout Orientation="Vertical">
-        <StackLayout Orientation="Horizontal" Margin="20,30,20,0">
+        <StackLayout Orientation="Horizontal" Margin="20,20,20,0">
             <Image Source="steam.png" Margin="0,0,10,0" WidthRequest="21" />
             <Label Text="Steam" TextColor="#fff" FontSize="24" FontAttributes="Bold" />
             <Label Text="Safety" TextColor="#fff" FontSize="24" />
@@ -59,7 +61,7 @@
         <Label Text="Tip: If you don't share your PC, you can select 'Remember my password' when you sign in to the PC client to enter your password and authenicator code less often." TextColor="#31BCEC" FontSize="15" Margin="20,20,20,0" />
         <StackLayout Orientation="Vertical" Margin="20,10">
             <yummy:PancakeView Background="#212531" >
-                <Button Text="Remove Authinicator" x:Name="RemAuth" TextColor="#fff" HeightRequest="50"/>
+                <Button Text="Remove Authinicator" x:Name="RemAuth" Clicked="RemAuth_Clicked" TextColor="#fff" HeightRequest="50"/>
             </yummy:PancakeView>
             <yummy:PancakeView Background="#212531" Margin="0,-4,0,-4">
                 <Button Text="Add Authinicator" x:Name="AddAuth" TextColor="#fff" HeightRequest="50" />

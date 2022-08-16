@@ -69,19 +69,23 @@ namespace Guard.Library
                 _files.Add(file);
                 return true;
             }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            catch (Exception ex) { return false; }
         }
 
         public static string GetFileByName(string name)
         {
-            string fileName = "";
-
-            fileName = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
+            string fileName = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
 
             return fileName;
+        }
+
+        public static bool RemoveFileByName(string name)
+        {
+            string fileName = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
+            if (!File.Exists(fileName))
+                return false;
+
+            try { File.Delete(fileName); return true; } catch (Exception ex) { return false; }
         }
     }
 }
