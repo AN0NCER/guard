@@ -87,6 +87,8 @@ namespace Guard.Library
 
             try { File.Delete(fileName); return true; } catch (Exception ex) { return false; }
         }
+
+        public static void UpdateFiles() => _files = GetFiles();
     }
 }
 

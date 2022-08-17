@@ -80,7 +80,8 @@ namespace Guard
             var write = IO.AddAndWrite(linker.LinkedAccount.AccountName,
                 JsonConvert.SerializeObject(linker.LinkedAccount, Formatting.Indented));
 
-            if (!write) {
+            if (!write)
+            {
                 Login.IsEnabled = true;
                 return;
             }
@@ -130,6 +131,33 @@ namespace Guard
                 PickerTitle = "Pick Guard Account",
                 FileTypes = customFileType
             });
+
+            if (pickResult == null)
+                return;
+
+            try
+            {
+                SteamGuardAccount steamGuard = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(pickResult.FullPath));
+                if (String.IsNullOrEmpty(steamGuard.AccountName))
+                    return;
+
+                if (File.Exists(IO.GetFileByName(steamGuard.AccountName)))
+                {
+                    bool answer = await DisplayAlert("Replace?", $"An account with the same name ({steamGuard.AccountName}) already exists. Do you want to replace?", "Yes", "No");
+
+                    if (!answer)
+                        return;
+
+                    IO.RemoveFileByName(steamGuard.AccountName);
+                }
+
+                IO.AddAndWrite(steamGuard.AccountName, JsonConvert.SerializeObject(steamGuard));
+                NextPage();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
     }
 }

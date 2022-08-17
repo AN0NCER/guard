@@ -64,15 +64,12 @@ namespace Guard
             new Thread(AddItemViews).Start();
         }
 
-        
+
 
         //Getting and updating the passcode
         void GuardSecretCode()
         {
-            Dispatcher.BeginInvokeOnMainThread(() =>
-            {
-                CurGuard.ItemView.BackgroundColor = Color.FromHex("#31BCEC");
-            });
+            new Thread(SetItemColor).Start();
             while (true)
             {
                 string s = _guardAccount.GenerateSteamGuardCode();
@@ -106,8 +103,12 @@ namespace Guard
         }
 
         //Remove Guard Auth
-        void RemAuth_Clicked(System.Object sender, System.EventArgs e)
+        async void RemAuth_Clicked(System.Object sender, System.EventArgs e)
         {
+            bool question = await DisplayAlert("Delete?", $"Are you sure you want to remove the authenticator from your account ({CurGuard.AccountName})?", "Yes", "No");
+            if (!question)
+                return;
+
             bool answer = _guardAccount.DeactivateAuthenticator();
 
             if (!answer)
@@ -120,7 +121,7 @@ namespace Guard
 
             Guards.Remove(CurGuard);
 
-            if(Guards.Count <= 0)
+            if (Guards.Count <= 0)
             {
                 Application.Current.MainPage = new FirstLogin();
             }
@@ -132,6 +133,24 @@ namespace Guard
             Guards.ForEach(x =>
             {
                 ItemViewer.Children.Add(x.ItemView);
+            });
+        }
+
+        //Change Color d't active Item
+        void SetItemColor()
+        {
+            Guards.ForEach(x =>
+            {
+                if (x == CurGuard)
+                    Dispatcher.BeginInvokeOnMainThread(() =>
+                    {
+                        CurGuard.ItemView.BackgroundColor = Color.FromHex("#31BCEC");
+                    });
+                else
+                    Dispatcher.BeginInvokeOnMainThread(() =>
+                    {
+                        x.ItemView.BackgroundColor = Color.FromHex("#595E6E");
+                    });
             });
         }
 
@@ -147,13 +166,14 @@ namespace Guard
             {
                 Title = $"Secret Guard {_guardAccount.AccountName}",
                 File = new ShareFile(filePath)
-            }) ;
+            });
         }
 
         //Adding new Account or Export
         async void AddAuth_Clicked(System.Object sender, System.EventArgs e)
         {
             var navigationPage = new NavigationPage(new FirstLogin(true));
+            navigationPage.Disappearing += NavigationPage_Disappearing;
             if (Device.RuntimePlatform == Device.iOS)
             {
                 Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
@@ -161,6 +181,37 @@ namespace Guard
                     Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
             }
             await Navigation.PushModalAsync(navigationPage);
+        }
+
+        private void NavigationPage_Disappearing(object sender, EventArgs e)
+        {
+            new Thread(UpdateListAccounts).Start();
+        }
+
+        /// <summary>
+        /// Update Accounts From File and List
+        /// </summary>
+        void UpdateListAccounts()
+        {
+            IO.UpdateFiles();
+            if (IO.Files.Count > Guards.Count)
+            {
+                UGuard addGuard = null;
+
+                IO.Files.ForEach(x =>
+                {
+                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x));
+
+                    Guards.ForEach(x =>
+                    {
+                        if (x.AccountName != tmpGuard.AccountName)
+                            addGuard = tmpGuard;
+                    });
+                });
+
+                if (addGuard != null)
+                    Guards.Add(addGuard);
+            }
         }
     }
 }
