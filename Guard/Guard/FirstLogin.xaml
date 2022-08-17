@@ -47,6 +47,7 @@
                 </StackLayout>
             </yummy:PancakeView>
             <Button Text="Forgot your password?" BackgroundColor="Transparent" FontSize="14" TextColor="#000" VerticalOptions="End" Margin="0" />
+            <Button Text="Import Account" x:Name="IportAcc" Clicked="IportAcc_Clicked" BackgroundColor="Transparent" FontSize="14" TextColor="#000" VerticalOptions="End" Margin="0" />
         </StackLayout>
 
 

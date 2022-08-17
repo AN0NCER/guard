@@ -63,7 +63,7 @@
                     <Button Text="Remove Authinicator" x:Name="RemAuth" Clicked="RemAuth_Clicked" TextColor="#fff" HeightRequest="50"/>
                 </yummy:PancakeView>
                 <yummy:PancakeView Background="#212531" Margin="0,-4,0,-4">
-                    <Button Text="Add Authinicator" x:Name="AddAuth" TextColor="#fff" HeightRequest="50" />
+                    <Button Text="Add Authinicator" x:Name="AddAuth" Clicked="AddAuth_Clicked" TextColor="#fff" HeightRequest="50" />
                 </yummy:PancakeView>
                 <yummy:PancakeView Background="#212531" >
                     <Button x:Name="ShareFile" Clicked="ShareFile_Clicked" Text="Export Guard File" TextColor="#fff" HeightRequest="50" />

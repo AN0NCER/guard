@@ -149,5 +149,18 @@ namespace Guard
                 File = new ShareFile(filePath)
             }) ;
         }
+
+        //Adding new Account or Export
+        async void AddAuth_Clicked(System.Object sender, System.EventArgs e)
+        {
+            var navigationPage = new NavigationPage(new FirstLogin(true));
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
+                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
+                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
+            }
+            await Navigation.PushModalAsync(navigationPage);
+        }
     }
 }

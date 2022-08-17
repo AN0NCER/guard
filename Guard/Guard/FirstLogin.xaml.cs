@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 
 namespace Guard
 {
@@ -111,6 +112,24 @@ namespace Guard
                 }
                 await Navigation.PushModalAsync(navigationPage);
             }
+        }
+
+
+        //Import Account
+        async void IportAcc_Clicked(System.Object sender, System.EventArgs e)
+        {
+            var customFileType =
+                new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    { DevicePlatform.iOS, new[] { "com.Guard.guard" } }, // or general UTType values
+                    { DevicePlatform.Android, new[] { "guard", "json" } }
+                });
+
+            var pickResult = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Pick Guard Account",
+                FileTypes = customFileType
+            });
         }
     }
 }
