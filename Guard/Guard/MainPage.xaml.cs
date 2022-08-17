@@ -14,6 +14,8 @@ using System.IO;
 using System.Threading;
 using SteamAuth;
 using System.Collections.Specialized;
+using Xamarin.Forms.Internals;
+using Xamarin.Essentials;
 
 namespace Guard
 {
@@ -53,14 +55,24 @@ namespace Guard
             if (IO.Files.Count <= 0)
                 return; //Exit Program. Somewhere it looks like a bug in the code;
 
-            IO.Files.ForEach(x => {
+            IO.Files.ForEach(x =>
+            {
+                //Adding guards list account
                 Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
             });
+
+            new Thread(AddItemViews).Start();
         }
+
+        
 
         //Getting and updating the passcode
         void GuardSecretCode()
         {
+            Dispatcher.BeginInvokeOnMainThread(() =>
+            {
+                CurGuard.ItemView.BackgroundColor = Color.FromHex("#31BCEC");
+            });
             while (true)
             {
                 string s = _guardAccount.GenerateSteamGuardCode();
@@ -90,6 +102,52 @@ namespace Guard
         //Copy Guard Code
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
+
+        }
+
+        //Remove Guard Auth
+        void RemAuth_Clicked(System.Object sender, System.EventArgs e)
+        {
+            bool answer = _guardAccount.DeactivateAuthenticator();
+
+            if (!answer)
+                return;
+
+            answer = IO.RemoveFileByName(CurGuard.AccountName);
+
+            if (!answer)
+                return;
+
+            Guards.Remove(CurGuard);
+
+            if(Guards.Count <= 0)
+            {
+                Application.Current.MainPage = new FirstLogin();
+            }
+        }
+
+        //Add point accounts
+        void AddItemViews()
+        {
+            Guards.ForEach(x =>
+            {
+                ItemViewer.Children.Add(x.ItemView);
+            });
+        }
+
+        //Share Secret File
+        async void ShareFile_Clicked(System.Object sender, System.EventArgs e)
+        {
+            string filePath = IO.GetFileByName(_guardAccount.AccountName);
+
+            if (!File.Exists(filePath))
+                return;
+
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = $"Secret Guard {_guardAccount.AccountName}",
+                File = new ShareFile(filePath)
+            }) ;
         }
     }
 }
