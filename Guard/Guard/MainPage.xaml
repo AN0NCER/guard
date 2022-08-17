@@ -19,7 +19,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Text="Guard" HeightRequest="24" Margin="2" BackgroundColor="#1C202C" TextColor="#fff" />
-                <Button Text="Trade" Grid.Column="1" IsEnabled="False" HeightRequest="24" />
+                <Button BackgroundColor="Transparent" TextColor="#595D6E" Text="Trade" Grid.Column="1" HeightRequest="24" />
             </Grid>
         </yummy:PancakeView>
         <yummy:PancakeView HeightRequest="200" BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="0,1">
@@ -60,13 +60,13 @@
         <ScrollView>
             <StackLayout Orientation="Vertical" Margin="20,10">
                 <yummy:PancakeView Background="#212531" >
-                    <Button Text="Remove Authinicator" x:Name="RemAuth" Clicked="RemAuth_Clicked" TextColor="#fff" HeightRequest="50"/>
+                    <Button BackgroundColor="Transparent" Text="Remove Authinicator" x:Name="RemAuth" Clicked="RemAuth_Clicked" TextColor="#fff" HeightRequest="50"/>
                 </yummy:PancakeView>
                 <yummy:PancakeView Background="#212531" Margin="0,-4,0,-4">
-                    <Button Text="Add Authinicator" x:Name="AddAuth" Clicked="AddAuth_Clicked" TextColor="#fff" HeightRequest="50" />
+                    <Button BackgroundColor="Transparent" Text="Add Authinicator" x:Name="AddAuth" Clicked="AddAuth_Clicked" TextColor="#fff" HeightRequest="50" />
                 </yummy:PancakeView>
                 <yummy:PancakeView Background="#212531" >
-                    <Button x:Name="ShareFile" Clicked="ShareFile_Clicked" Text="Export Guard File" TextColor="#fff" HeightRequest="50" />
+                    <Button BackgroundColor="Transparent" x:Name="ShareFile" Clicked="ShareFile_Clicked" Text="Export Guard File" TextColor="#fff" HeightRequest="50" />
                 </yummy:PancakeView>
             </StackLayout>
         </ScrollView>
