@@ -97,10 +97,9 @@ namespace Guard
         }
 
         //Copy Guard Code
-        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
-        {
+        async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e) =>
+            await Clipboard.SetTextAsync(CurGuard.SecretCode);
 
-        }
 
         //Remove Guard Auth
         async void RemAuth_Clicked(System.Object sender, System.EventArgs e)
