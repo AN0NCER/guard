@@ -22,7 +22,7 @@
 	<key>CFBundleName</key>
 	<string>Guard</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>UIDeviceFamily</key>
@@ -45,7 +45,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-<<<<<<< Updated upstream
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -94,20 +93,6 @@
 			</dict>
 		</dict>
 	</array>
-=======
-	<key>MinimumOSVersion</key>
-	<string>8.0</string>
-	<key>CFBundleDisplayName</key>
-	<string>Guard</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.anoncer.Guard</string>
-	<key>CFBundleVersion</key>
-	<string>1.1</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>CFBundleName</key>
-	<string>Guard</string>
->>>>>>> Stashed changes
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
