@@ -24,7 +24,7 @@
 
 - [X] Page Login   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Page Guard  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
-- [X] View Item Controls 
+- [X] View Item Controls  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) ![BUG](https://img.shields.io/badge/-BUG-critical)
 - [ ] Page Trade
 - [X] Page Add Account ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 
