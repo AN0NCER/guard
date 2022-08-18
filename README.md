@@ -17,7 +17,7 @@
 - [X] Ability to import a file   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Steam Guard Code Generation   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Authorization   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
-- [X] Disable Steam Guard from Steam Account   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Disable Steam Guard from Steam Account   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) ![BUG](https://img.shields.io/badge/-BUG-critical)
 - [ ] Acceptance, rejection trade
 
 ## Design
