@@ -119,13 +119,11 @@ namespace Guard
         //Import Account
         async void IportAcc_Clicked(System.Object sender, System.EventArgs e)
         {
-            var customFileType =
-                new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+            var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
-                    { DevicePlatform.iOS, new[] { "com.Guard.guard" } }, // or general UTType values
-                    { DevicePlatform.Android, new[] { "guard", "json" } }
-                });
-
+                    { DevicePlatform.iOS, new[] { "com.Guard.guard" } }, // or general UTType values  
+                    {DevicePlatform.Android , new[] { "application/octet-stream" } }
+            });
             var pickResult = await FilePicker.PickAsync(new PickOptions
             {
                 PickerTitle = "Pick Guard Account",
@@ -156,6 +154,7 @@ namespace Guard
             }
             catch (Exception ex)
             {
+                await DisplayAlert("Error", "The file could not be recognized.", "Ok");
                 return;
             }
         }
