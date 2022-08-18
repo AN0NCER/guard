@@ -85,7 +85,8 @@ namespace Guard.Library
             if (!File.Exists(fileName))
                 return false;
 
-            try { File.Delete(fileName); return true; } catch (Exception ex) { return false; }
+            try { File.Delete(fileName); UpdateFiles(); return true; } catch (Exception ex) { return false; }
+            
         }
 
         public static void UpdateFiles() => _files = GetFiles();

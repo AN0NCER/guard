@@ -12,7 +12,7 @@ namespace Guard.CData
 
         private double _progressTime = 0f;
 
-        public PancakeView ItemView { get; set; } =new PancakeView() {
+        public PancakeView ItemView { get; set; } = new PancakeView() {
             HeightRequest = 7,
             WidthRequest = 7,
             CornerRadius = 4,

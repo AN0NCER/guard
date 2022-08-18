@@ -19,7 +19,7 @@ using Xamarin.Essentials;
 
 namespace Guard
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
         Thread TGUARD; // Thread update Guard Code
 
@@ -63,9 +63,6 @@ namespace Guard
 
             new Thread(AddItemViews).Start();
         }
-
-
-
         //Getting and updating the passcode
         void GuardSecretCode()
         {
@@ -109,9 +106,10 @@ namespace Guard
             if (!question)
                 return;
 
+            bool refreshSession = _guardAccount.RefreshSession();
             bool answer = _guardAccount.DeactivateAuthenticator();
 
-            if (!answer)
+            if (!answer && refreshSession)
                 return;
 
             answer = IO.RemoveFileByName(CurGuard.AccountName);
@@ -119,11 +117,16 @@ namespace Guard
             if (!answer)
                 return;
 
-            Guards.Remove(CurGuard);
 
-            if (Guards.Count <= 0)
+            if ((Guards.Count - 1) <= 0)
             {
+                TGUARD.Abort();
                 Application.Current.MainPage = new FirstLogin();
+            }
+            else
+            {
+                ItemViewer.Children.Remove(CurGuard.ItemView);
+                Guards.Remove(CurGuard);
             }
         }
 
@@ -210,7 +213,11 @@ namespace Guard
                 });
 
                 if (addGuard != null)
+                {
+                    Dispatcher.BeginInvokeOnMainThread(() => ItemViewer.Children.Add(addGuard.ItemView));
                     Guards.Add(addGuard);
+                }
+                    
             }
         }
     }

@@ -52,6 +52,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
+
                 <StackLayout x:Name="ItemViewer" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,5" />
             </Grid>
         </yummy:PancakeView>
