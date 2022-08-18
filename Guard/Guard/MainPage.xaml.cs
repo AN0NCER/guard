@@ -216,8 +216,18 @@ namespace Guard
                     Dispatcher.BeginInvokeOnMainThread(() => ItemViewer.Children.Add(addGuard.ItemView));
                     Guards.Add(addGuard);
                 }
-                    
+
             }
+        }
+
+        //Show Trade Control
+        void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            TradeView grid = new TradeView(_guardAccount);
+
+            ViewContent.Children.Add(grid);
+            Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); },grid.Width,0);
+            animation.Commit(this, "view", length:250, easing:Easing.SinInOut);
         }
     }
 }
