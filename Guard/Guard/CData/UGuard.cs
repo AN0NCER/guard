@@ -1,6 +1,8 @@
 ﻿using System;
 using SteamAuth;
 using System.ComponentModel;
+using Xamarin.Forms.PancakeView;
+using Xamarin.Forms;
 
 namespace Guard.CData
 {
@@ -9,6 +11,13 @@ namespace Guard.CData
         private string _secretCode = "00000";
 
         private double _progressTime = 0f;
+
+        public PancakeView ItemView { get; set; } =new PancakeView() {
+            HeightRequest = 7,
+            WidthRequest = 7,
+            CornerRadius = 4,
+            BackgroundColor = Color.FromHex("#595E6E")
+        };
 
         public string SecretCode
         {

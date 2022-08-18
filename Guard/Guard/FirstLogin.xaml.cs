@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 
 namespace Guard
 {
@@ -79,7 +80,8 @@ namespace Guard
             var write = IO.AddAndWrite(linker.LinkedAccount.AccountName,
                 JsonConvert.SerializeObject(linker.LinkedAccount, Formatting.Indented));
 
-            if (!write) {
+            if (!write)
+            {
                 Login.IsEnabled = true;
                 return;
             }
@@ -110,6 +112,50 @@ namespace Guard
                         Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.FullScreen);
                 }
                 await Navigation.PushModalAsync(navigationPage);
+            }
+        }
+
+
+        //Import Account
+        async void IportAcc_Clicked(System.Object sender, System.EventArgs e)
+        {
+            var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    { DevicePlatform.iOS, new[] { "com.Guard.guard" } }, // or general UTType values  
+                    {DevicePlatform.Android , new[] { "application/octet-stream" } }
+            });
+            var pickResult = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Pick Guard Account",
+                FileTypes = customFileType
+            });
+
+            if (pickResult == null)
+                return;
+
+            try
+            {
+                SteamGuardAccount steamGuard = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(pickResult.FullPath));
+                if (String.IsNullOrEmpty(steamGuard.AccountName))
+                    return;
+
+                if (File.Exists(IO.GetFileByName(steamGuard.AccountName)))
+                {
+                    bool answer = await DisplayAlert("Replace?", $"An account with the same name ({steamGuard.AccountName}) already exists. Do you want to replace?", "Yes", "No");
+
+                    if (!answer)
+                        return;
+
+                    IO.RemoveFileByName(steamGuard.AccountName);
+                }
+
+                IO.AddAndWrite(steamGuard.AccountName, JsonConvert.SerializeObject(steamGuard));
+                NextPage();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "The file could not be recognized.", "Ok");
+                return;
             }
         }
     }

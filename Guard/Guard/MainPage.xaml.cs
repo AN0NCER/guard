@@ -14,6 +14,8 @@ using System.IO;
 using System.Threading;
 using SteamAuth;
 using System.Collections.Specialized;
+using Xamarin.Forms.Internals;
+using Xamarin.Essentials;
 
 namespace Guard
 {
@@ -53,14 +55,21 @@ namespace Guard
             if (IO.Files.Count <= 0)
                 return; //Exit Program. Somewhere it looks like a bug in the code;
 
-            IO.Files.ForEach(x => {
+            IO.Files.ForEach(x =>
+            {
+                //Adding guards list account
                 Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
             });
+
+            new Thread(AddItemViews).Start();
         }
+
+
 
         //Getting and updating the passcode
         void GuardSecretCode()
         {
+            new Thread(SetItemColor).Start();
             while (true)
             {
                 string s = _guardAccount.GenerateSteamGuardCode();
@@ -88,8 +97,120 @@ namespace Guard
         }
 
         //Copy Guard Code
-        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e) =>
+            await Clipboard.SetTextAsync(CurGuard.SecretCode);
+
+
+        //Remove Guard Auth
+        async void RemAuth_Clicked(System.Object sender, System.EventArgs e)
         {
+            bool question = await DisplayAlert("Delete?", $"Are you sure you want to remove the authenticator from your account ({CurGuard.AccountName})?", "Yes", "No");
+            if (!question)
+                return;
+
+            bool answer = _guardAccount.DeactivateAuthenticator();
+
+            if (!answer)
+                return;
+
+            answer = IO.RemoveFileByName(CurGuard.AccountName);
+
+            if (!answer)
+                return;
+
+            Guards.Remove(CurGuard);
+
+            if (Guards.Count <= 0)
+            {
+                Application.Current.MainPage = new FirstLogin();
+            }
+        }
+
+        //Add point accounts
+        void AddItemViews()
+        {
+            Guards.ForEach(x =>
+            {
+                ItemViewer.Children.Add(x.ItemView);
+            });
+        }
+
+        //Change Color d't active Item
+        void SetItemColor()
+        {
+            Guards.ForEach(x =>
+            {
+                if (x == CurGuard)
+                    Dispatcher.BeginInvokeOnMainThread(() =>
+                    {
+                        CurGuard.ItemView.BackgroundColor = Color.FromHex("#31BCEC");
+                    });
+                else
+                    Dispatcher.BeginInvokeOnMainThread(() =>
+                    {
+                        x.ItemView.BackgroundColor = Color.FromHex("#595E6E");
+                    });
+            });
+        }
+
+        //Share Secret File
+        async void ShareFile_Clicked(System.Object sender, System.EventArgs e)
+        {
+            string filePath = IO.GetFileByName(_guardAccount.AccountName);
+
+            if (!File.Exists(filePath))
+                return;
+
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = $"Secret Guard {_guardAccount.AccountName}",
+                File = new ShareFile(filePath)
+            });
+        }
+
+        //Adding new Account or Export
+        async void AddAuth_Clicked(System.Object sender, System.EventArgs e)
+        {
+            var navigationPage = new NavigationPage(new FirstLogin(true));
+            navigationPage.Disappearing += NavigationPage_Disappearing;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
+                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
+                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
+            }
+            await Navigation.PushModalAsync(navigationPage);
+        }
+
+        private void NavigationPage_Disappearing(object sender, EventArgs e)
+        {
+            new Thread(UpdateListAccounts).Start();
+        }
+
+        /// <summary>
+        /// Update Accounts From File and List
+        /// </summary>
+        void UpdateListAccounts()
+        {
+            IO.UpdateFiles();
+            if (IO.Files.Count > Guards.Count)
+            {
+                UGuard addGuard = null;
+
+                IO.Files.ForEach(x =>
+                {
+                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x));
+
+                    Guards.ForEach(x =>
+                    {
+                        if (x.AccountName != tmpGuard.AccountName)
+                            addGuard = tmpGuard;
+                    });
+                });
+
+                if (addGuard != null)
+                    Guards.Add(addGuard);
+            }
         }
     }
 }

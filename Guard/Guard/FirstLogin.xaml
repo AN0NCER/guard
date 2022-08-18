@@ -5,9 +5,7 @@
     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
     xmlns:local="clr-namespace:Guard"
     x:Class="Guard.FirstLogin"
-    NavigationPage.HasNavigationBar="False"
-    >
-
+    NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid VerticalOptions="Start">
             <yummy:PancakeView HeightRequest="356" BackgroundColor="#1C202C" CornerRadius="0,0,50,50">
@@ -49,6 +47,7 @@
                 </StackLayout>
             </yummy:PancakeView>
             <Button Text="Forgot your password?" BackgroundColor="Transparent" FontSize="14" TextColor="#000" VerticalOptions="End" Margin="0" />
+            <Button Text="Import Account" x:Name="IportAcc" Clicked="IportAcc_Clicked" BackgroundColor="Transparent" FontSize="14" TextColor="#000" VerticalOptions="End" Margin="0" />
         </StackLayout>
 
 
