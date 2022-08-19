@@ -19,20 +19,20 @@ namespace RefreshViewDemo.Droid
         {
             base.OnElementChanged(e);
 
-            if (Control != null)
-            {
-                GradientDrawable gd = new GradientDrawable();
-                gd.SetColor(Android.Graphics.Color.Transparent);
-                this.Control.SetBackground(gd);
-                this.Control.SetPadding(20, 0, 0, 0);
+            //if (Control != null)
+            //{
+            //    GradientDrawable gd = new GradientDrawable();
+            //    gd.SetColor(Android.Graphics.Color.Transparent);
+            //    this.Control.SetBackground(gd);
+            //    this.Control.SetPadding(20, 0, 0, 0);
 
-                this.Control.SetTextCursorDrawable(2131165279);//cursor.xml
+            //    this.Control.SetTextCursorDrawable(2131165279);//cursor.xml
                                                                
-                CustomEntry customEntry = (CustomEntry)e.NewElement;
+            //    CustomEntry customEntry = (CustomEntry)e.NewElement;
 
-                if (customEntry.IsPasswordFlag)
-                    this.Control.InputType = InputTypes.TextVariationVisiblePassword;
-            }
+            //    if (customEntry.IsPasswordFlag)
+            //        this.Control.InputType = InputTypes.TextVariationVisiblePassword;
+            //}
         }
 
     }
