@@ -28,18 +28,18 @@
                 </yummy:PancakeView.Shadow>
                 <StackLayout Orientation="Vertical">
                     <yummy:PancakeView CornerRadius="12" Margin="20, 20, 20, 10">
-                        <local:CustomEntry x:Name="Username" Placeholder="Username" BackgroundColor="#DBE0ED" FontSize="14" HeightRequest="50">
-                            <local:CustomEntry.Keyboard>
+                        <Entry x:Name="Username" Placeholder="Username" BackgroundColor="#DBE0ED" FontSize="14" HeightRequest="50">
+                            <Entry.Keyboard>
                                 <Keyboard x:FactoryMethod="Create">
                                     <x:Arguments>
                                         <KeyboardFlags>None</KeyboardFlags>
                                     </x:Arguments>
                                 </Keyboard>
-                            </local:CustomEntry.Keyboard>
-                        </local:CustomEntry>
+                            </Entry.Keyboard>
+                        </Entry>
                     </yummy:PancakeView>
                         <yummy:PancakeView CornerRadius="12" Margin="20,0,20,10">
-                            <local:CustomEntry x:Name="Password" Placeholder="Password" IsPassword="True" BackgroundColor="#DBE0ED" FontSize="14" HeightRequest="50"/>
+                            <Entry x:Name="Password" Placeholder="Password" IsPassword="True" BackgroundColor="#DBE0ED" FontSize="14" HeightRequest="50"/>
                         </yummy:PancakeView>
                         <yummy:PancakeView CornerRadius="12" Margin="20,0,20,20">
                             <Button Text="Login" x:Name="Login" Clicked="Login_Clicked" HeightRequest="50" FontSize="14" BackgroundColor="#3F74FF" TextColor="#fff" FontAttributes="Bold" />
