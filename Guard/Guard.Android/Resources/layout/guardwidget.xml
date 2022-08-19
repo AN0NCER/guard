@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#2F3548"
+    android:gravity="center">
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:id="@+id/AccauntName"
+        android:textColor="#979AA3"
+        android:text="Logged in as user"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60dp"
+        android:id="@+id/Code"
+        android:textColor="#979AA3"
+        android:text="N5KCV"/>
+
+    <ProgressBar 
+        android:progress="100"
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:foreground="#3F6CB0" 
+        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="10dp"/>
+
+    <!--
+    <ImageView
+        android:src="@drawable/gridbg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView1"/>-->
+
+
+
+
+
+</LinearLayout>
