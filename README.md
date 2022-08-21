@@ -7,7 +7,7 @@
 
 <img src="Resorces/iconApp.png" align="left" width="50" />
 
-**Android**, **IOS** application that protects your **Steam** account from theft. An amateur project with a redesigned design.
+**Android**, **IOS** application that protects your **Steam** account from theft. An amateur project with a redesigned design. Protect your **Steam** account with this program
 
 ## Functional
 
