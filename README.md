@@ -41,4 +41,4 @@ Below are screenshots from IOS, more can be found in [**Figma**](https://www.fig
 
 ## Image
 
-![Trade](Resorces/iphoneTrade.png)
+<img src="Resorces/iphoneTrade.png" align="left" width="310" />
