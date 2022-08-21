@@ -5,7 +5,7 @@
 
 # Guard
 
-<img src="Resorces/iconApp.png" align="right" width="50" />
+<img src="Resorces/iconApp.png" align="left" width="50" />
 
 **Android**, **IOS** application that protects your **Steam** account from theft. An amateur project with a redesigned design.
 
