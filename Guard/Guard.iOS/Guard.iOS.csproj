@@ -147,5 +147,6 @@
     <BundleResource Include="Resources\styleLogin.png" />
     <BundleResource Include="Resources\steamLogo.png" />
     <BundleResource Include="Resources\steam.png" />
+    <BundleResource Include="Resources\swap.png" />
   </ItemGroup>
 </Project>
