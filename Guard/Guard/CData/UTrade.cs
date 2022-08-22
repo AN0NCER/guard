@@ -6,7 +6,7 @@ namespace Guard.CData
 {
     public class UTrade
     {
-        public ulong IDTrade { get; set; }
+        public Confirmation Confirmation { get; set; }
         public AccountName AccountNames { get; set; }
         public TradeResponseOffer.Response Response { get; set; }
     }

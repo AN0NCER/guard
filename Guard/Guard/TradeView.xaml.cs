@@ -34,6 +34,7 @@ namespace Guard
         {
             new Thread(() =>
             {
+                Confirmations.Clear();
                 bool refreshing = _guardAccount.RefreshSession();
                 if (!refreshing)
                 {
@@ -50,7 +51,7 @@ namespace Guard
                             Util.ConvertSteam64(trade.TradeResponse.Offer.AccountidOther).ToString());
                         Confirmations.Add(new UTrade {
                             Response = trade.TradeResponse,
-                            IDTrade = trades[i].Creator,
+                            Confirmation = trades[i],
                             AccountNames = new AccountName {
                                 NameAccount = users.UserResponse.Players[0],
                                 NameOther = users.UserResponse.Players[1]
@@ -70,10 +71,20 @@ namespace Guard
 
         void AcceptTrade_Invoked(System.Object sender, System.EventArgs e)
         {
+            SwipeItem item = sender as SwipeItem;
+            UTrade trades = item.BindingContext as UTrade;
+            bool acceptConfirmation = _guardAccount.AcceptConfirmation(trades.Confirmation);
+            if (acceptConfirmation)
+                Confirmations.Remove(trades);
         }
 
         void DeclineTrade_Invoked(System.Object sender, System.EventArgs e)
         {
+            SwipeItem item = sender as SwipeItem;
+            UTrade trades = item.BindingContext as UTrade;
+            bool denyConfirmation = _guardAccount.DenyConfirmation(trades.Confirmation);
+            if (denyConfirmation)
+                Confirmations.Remove(trades);
         }
     }
 }
