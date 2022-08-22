@@ -18,8 +18,8 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="GuardBtn" Text="Guard" HeightRequest="24" Margin="2" BackgroundColor="#1C202C" TextColor="#fff" />
-                <Button x:Name="TardeBtn" Clicked="TardeBtn_Clicked" BackgroundColor="Transparent" TextColor="#595D6E" Text="Trade" Grid.Column="1" HeightRequest="24" />
+                <Button x:Name="GuardBtn" Clicked="GuardBtn_Clicked" Text="Guard" HeightRequest="24" Margin="2" BackgroundColor="#1C202C" TextColor="#fff" />
+                <Button x:Name="TardeBtn" Clicked="TardeBtn_Clicked" BackgroundColor="Transparent" Margin="2" TextColor="#595D6E" Text="Trade" Grid.Column="1" HeightRequest="24" />
             </Grid>
         </yummy:PancakeView>
         <Grid x:Name="ViewContent">

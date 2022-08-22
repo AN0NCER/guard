@@ -24,6 +24,8 @@ namespace Guard
         Thread TGUARD; // Thread update Guard Code
 
         SteamGuardAccount _guardAccount; // Guard Account 
+        bool isTradeActive = false;
+        TradeView grid;
 
         public ObservableCollection<UGuard> Guards { get; set; } = new ObservableCollection<UGuard>(); //List Guards Accounts
         public UGuard CurGuard { get; set; } //User Guard Current Selected
@@ -223,11 +225,39 @@ namespace Guard
         //Show Trade Control
         void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
         {
-            TradeView grid = new TradeView(_guardAccount);
+            if (!isTradeActive)
+            {
+                grid = new TradeView(_guardAccount);
+                ViewContent.Children.Add(grid);
+                Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, grid.Width, 0);
+                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut);
+                isTradeActive = true;
 
-            ViewContent.Children.Add(grid);
-            Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); },grid.Width,0);
-            animation.Commit(this, "view", length:250, easing:Easing.SinInOut);
+                TardeBtn.BackgroundColor = Color.FromHex("#1C202C");
+                TardeBtn.TextColor = Color.FromHex("#fff");
+
+                GuardBtn.BackgroundColor = Color.Transparent;
+                GuardBtn.TextColor = Color.FromHex("#595D6E");
+            }   
+            
         }
+
+        private void GuardBtn_Clicked(object sender, EventArgs e)
+        {
+            if (isTradeActive)
+            {
+                Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, 0, grid.Width, finished: () => ViewContent.Children.Remove(grid));
+                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut);
+                isTradeActive = false;
+
+                TardeBtn.BackgroundColor = Color.Transparent;
+                TardeBtn.TextColor = Color.FromHex("#595D6E");
+
+                GuardBtn.BackgroundColor = Color.FromHex("#1C202C");
+                GuardBtn.TextColor = Color.FromHex("#fff");
+            }
+            
+        }
+
     }
 }
