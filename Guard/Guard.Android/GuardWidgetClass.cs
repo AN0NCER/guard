@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using Guard.Library;
 using System.IO;
 using System.Threading;
+using Java.Util;
 
 namespace Guard.Droid
 {
@@ -23,30 +24,18 @@ namespace Guard.Droid
     [MetaData("android.appwidget.provider", Resource = "@xml/guardwidgetprovider")]
     public class GuardWidgetClass : AppWidgetProvider
     {
-        private SteamGuardAccount steamGuard;
-
         public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
         {
-            if (steamGuard == null)
-            {
-                List<string> files = IO.Files;
-                steamGuard = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(files[0]));
-            }
 
-            while (true)
-            {
-                string code = steamGuard.GenerateSteamGuardCode();
-                RemoteViews views = new RemoteViews(context.PackageName, Resource.Layout.guardwidget);
-                views.SetTextViewText(Resource.Id.Code, code);
-                appWidgetManager.UpdateAppWidget(appWidgetIds, views);
-                Thread.Sleep(30000);
-            }
         }
-        public override void OnReceive(Context context, Intent intent)
+        public override void OnEnabled(Context context)
         {
-            base.OnReceive(context, intent);
+            Intent intent = new Intent(context, typeof(WidgetService));
+            PendingIntent pending = PendingIntent.GetService(context, 0, intent, PendingIntentFlags.Mutable);
+            AlarmManager alarm = (AlarmManager)context.GetSystemService(Context.AlarmService);
+            alarm.Cancel(pending);
+            alarm.SetRepeating(AlarmType.Rtc, SystemClock.ElapsedRealtime(), 1000, pending);
         }
-        
-     
+
     }
 }

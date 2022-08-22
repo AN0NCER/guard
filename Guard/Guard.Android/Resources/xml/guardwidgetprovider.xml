@@ -2,7 +2,6 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
                     android:maxWidth="294dip"
                     android:maxHeight="294dip"
-                    android:updatePeriodMillis="100"
+                    android:updatePeriodMillis="0"
                     android:resizeMode="horizontal"
-                    android:initialLayout="@layout/guardwidget"
-					/>
+                    android:initialLayout="@layout/guardwidget"/>
