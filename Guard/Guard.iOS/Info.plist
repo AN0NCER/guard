@@ -55,7 +55,9 @@
 			<key>UTTypeDescription</key>
 			<string>Guard Account</string>
 			<key>UTTypeIconFiles</key>
-			<array/>
+			<array>
+				<string>iconFile.png</string>
+			</array>
 			<key>UTTypeIdentifier</key>
 			<string>com.Guard.guard</string>
 			<key>UTTypeTagSpecification</key>
@@ -79,7 +81,9 @@
 			<key>UTTypeDescription</key>
 			<string>Guard Account</string>
 			<key>UTTypeIconFiles</key>
-			<array/>
+			<array>
+				<string>iconFile.png</string>
+			</array>
 			<key>UTTypeIdentifier</key>
 			<string>com.Guard.guard</string>
 			<key>UTTypeTagSpecification</key>
