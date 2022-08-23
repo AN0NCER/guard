@@ -19,17 +19,17 @@
 - [X] Ability to import a file   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Steam Guard Code Generation   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Authorization   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
-- [X] Disable Steam Guard from Steam Account   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) ![BUG](https://img.shields.io/badge/-BUG-critical)
-- [ ] Show Trades
-- [ ] Accept Trade
-- [ ] Decline Trade
+- [X] Disable Steam Guard from Steam Account   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) 
+- [X] Show Trades ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple)
+- [X] Accept Trade
+- [X] Decline Trade
 
 ## Design
 
 - [X] Page Login   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Page Guard  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
-- [X] View Item Controls  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) ![BUG](https://img.shields.io/badge/-BUG-critical)
-- [ ] Page Trade
+- [X] View Item Controls  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Page Trade ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [ ] Page Trade Information
 - [X] Page Add Account ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 
@@ -44,3 +44,5 @@ Below are screenshots from IOS, more can be found in [**Figma**](https://www.fig
 ## Image
 
 <img src="Resorces/iphoneTrade.png" align="left" width="200" />
+
+<!--![BUG](https://img.shields.io/badge/-BUG-critical)-->
