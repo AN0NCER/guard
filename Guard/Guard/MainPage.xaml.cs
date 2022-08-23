@@ -243,7 +243,7 @@ namespace Guard
 
         private void GuardBtn_Clicked(object sender, EventArgs e)
         {
-            if (!isTradeActive && IsAnimate)
+            if (!isTradeActive || IsAnimate)
                 return;
 
             IsAnimate = true;
