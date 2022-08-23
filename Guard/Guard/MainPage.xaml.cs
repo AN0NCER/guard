@@ -222,15 +222,20 @@ namespace Guard
             }
         }
 
+
+        bool IsAnimate = false;
+
+
         //Show Trade Control
         void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
         {
-            if (!isTradeActive)
+            if (!isTradeActive && !IsAnimate)
             {
+                IsAnimate = true;
                 grid = new TradeView(_guardAccount);
                 ViewContent.Children.Add(grid);
                 Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, grid.Width, 0);
-                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut);
+                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished:(v,c) => IsAnimate = false);
                 isTradeActive = true;
 
                 TardeBtn.BackgroundColor = Color.FromHex("#1C202C");
@@ -244,10 +249,11 @@ namespace Guard
 
         private void GuardBtn_Clicked(object sender, EventArgs e)
         {
-            if (isTradeActive)
+            if (isTradeActive  && !IsAnimate)
             {
-                Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, 0, grid.Width, finished: () => ViewContent.Children.Remove(grid));
-                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut);
+                IsAnimate = true;
+                Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, 0, grid.Width);
+                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished:(v,c) => { ViewContent.Children.Remove(grid); IsAnimate = false;  });
                 isTradeActive = false;
 
                 TardeBtn.BackgroundColor = Color.Transparent;
