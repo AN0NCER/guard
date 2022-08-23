@@ -12,63 +12,68 @@
             <Label Text="Steam" TextColor="#fff" FontSize="24" FontAttributes="Bold" />
             <Label Text="Safety" TextColor="#fff" FontSize="24" />
         </StackLayout>
-        <yummy:PancakeView BackgroundColor="#30354A" HeightRequest="40" Margin="20,10,20,0" CornerRadius="5">
+        <yummy:PancakeView BackgroundColor="#30354A" HeightRequest="40" MinimumHeightRequest="40" Margin="20,10,20,0" CornerRadius="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Text="Guard" HeightRequest="24" Margin="2" BackgroundColor="#1C202C" TextColor="#fff" />
-                <Button BackgroundColor="Transparent" TextColor="#595D6E" Text="Trade" Grid.Column="1" HeightRequest="24" />
+                <Button x:Name="GuardBtn" Clicked="GuardBtn_Clicked" Text="Guard" HeightRequest="24" Margin="2" BackgroundColor="#1C202C" TextColor="#fff" />
+                <Button x:Name="TardeBtn" Clicked="TardeBtn_Clicked" BackgroundColor="Transparent" Margin="2" TextColor="#595D6E" Text="Trade" Grid.Column="1" HeightRequest="24" />
             </Grid>
         </yummy:PancakeView>
-        <yummy:PancakeView HeightRequest="200" BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="0,1">
-            <yummy:PancakeView.BackgroundGradientStops>
-                <yummy:GradientStopCollection>
-                    <yummy:GradientStop Color="#1C202C" Offset="0" />
-                    <yummy:GradientStop Color="#30364A" Offset="1" />
-                </yummy:GradientStopCollection>
-            </yummy:PancakeView.BackgroundGradientStops>
-            <Grid>
-                <Image Source="GridBG.png" Aspect="AspectFill" Margin="-40"/>
-                <CarouselView ItemsSource="{Binding Guards}" CurrentItem="{Binding CurGuard}" x:Name="GuardCarouse" CurrentItemChanged="GuardCarouse_CurrentItemChanged"  HorizontalScrollBarVisibility="Never" VerticalOptions="Center" HorizontalOptions="Center">
-                    <CarouselView.GestureRecognizers>
-                        <TapGestureRecognizer
+        <Grid x:Name="ViewContent">
+            <StackLayout>
+                <yummy:PancakeView HeightRequest="200" BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="0,1">
+                    <yummy:PancakeView.BackgroundGradientStops>
+                        <yummy:GradientStopCollection>
+                            <yummy:GradientStop Color="#1C202C" Offset="0" />
+                            <yummy:GradientStop Color="#30364A" Offset="1" />
+                        </yummy:GradientStopCollection>
+                    </yummy:PancakeView.BackgroundGradientStops>
+                    <Grid>
+                        <Image Source="GridBG.png" Aspect="AspectFill" Margin="-40"/>
+                        <CarouselView ItemsSource="{Binding Guards}" CurrentItem="{Binding CurGuard}" x:Name="GuardCarouse" CurrentItemChanged="GuardCarouse_CurrentItemChanged"  HorizontalScrollBarVisibility="Never" VerticalOptions="Center" HorizontalOptions="Center">
+                            <CarouselView.GestureRecognizers>
+                                <TapGestureRecognizer
                             Tapped="TapGestureRecognizer_Tapped"
                             NumberOfTapsRequired="1" />
-                    </CarouselView.GestureRecognizers>
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                        <Label Text="Logged in as" FontSize="12" TextColor="#80FFFFFF" />
-                                        <Label Text="{Binding AccountName}" FontSize="12" FontAttributes="Bold" TextColor="#80FFFFFF" />
-                                    </StackLayout>
-                                    <Label Text="{Binding SecretCode, Mode=TwoWay}" HorizontalTextAlignment="Center" TextTransform="Uppercase" TextColor="#fff" FontAttributes="Bold" FontSize="60" />
-                                    <ProgressBar ProgressColor="#3F6CB0" Progress="{Binding ProgressTime, Mode=TwoWay}" />
-                                </StackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                <StackLayout x:Name="ItemViewer" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,5" />
-            </Grid>
-        </yummy:PancakeView>
-        <Label Text="You'll enter your code each time you enter your password to sign in to your Steam account." FontSize="15" TextColor="#BBBCC0" Margin="20,10,20,0" />
-        <Label Text="Tip: If you don't share your PC, you can select 'Remember my password' when you sign in to the PC client to enter your password and authenicator code less often." TextColor="#31BCEC" FontSize="15" Margin="20,20,20,0" />
-        <ScrollView>
-            <StackLayout Orientation="Vertical" Margin="20,10">
-                <yummy:PancakeView Background="#212531" >
-                    <Button BackgroundColor="Transparent" Text="Remove Authinicator" x:Name="RemAuth" Clicked="RemAuth_Clicked" TextColor="#fff" HeightRequest="50"/>
+                            </CarouselView.GestureRecognizers>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                <Label Text="Logged in as" FontSize="12" TextColor="#80FFFFFF" />
+                                                <Label Text="{Binding AccountName}" FontSize="12" FontAttributes="Bold" TextColor="#80FFFFFF" />
+                                            </StackLayout>
+                                            <Label Text="{Binding SecretCode, Mode=TwoWay}" HorizontalTextAlignment="Center" TextTransform="Uppercase" TextColor="#fff" FontAttributes="Bold" FontSize="60" />
+                                            <ProgressBar ProgressColor="#3F6CB0" Progress="{Binding ProgressTime, Mode=TwoWay}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                        <StackLayout x:Name="ItemViewer" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,5" />
+                    </Grid>
                 </yummy:PancakeView>
-                <yummy:PancakeView Background="#212531" Margin="0,-4,0,-4">
-                    <Button BackgroundColor="Transparent" Text="Add Authinicator" x:Name="AddAuth" Clicked="AddAuth_Clicked" TextColor="#fff" HeightRequest="50" />
-                </yummy:PancakeView>
-                <yummy:PancakeView Background="#212531" >
-                    <Button BackgroundColor="Transparent" x:Name="ShareFile" Clicked="ShareFile_Clicked" Text="Export Guard File" TextColor="#fff" HeightRequest="50" />
-                </yummy:PancakeView>
+                <Label Text="You'll enter your code each time you enter your password to sign in to your Steam account." FontSize="15" TextColor="#BBBCC0" Margin="20,10,20,0" />
+                <Label Text="Tip: If you don't share your PC, you can select 'Remember my password' when you sign in to the PC client to enter your password and authenicator code less often." TextColor="#31BCEC" FontSize="15" Margin="20,20,20,0" />
+                <ScrollView>
+                    <StackLayout Orientation="Vertical" Margin="20,10">
+                        <yummy:PancakeView Background="#212531" >
+                            <Button BackgroundColor="Transparent" Text="Remove Authinicator" x:Name="RemAuth" Clicked="RemAuth_Clicked" TextColor="#fff" HeightRequest="50"/>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView Background="#212531" Margin="0,-4,0,-4">
+                            <Button BackgroundColor="Transparent" Text="Add Authinicator" x:Name="AddAuth" Clicked="AddAuth_Clicked" TextColor="#fff" HeightRequest="50" />
+                        </yummy:PancakeView>
+                        <yummy:PancakeView Background="#212531" >
+                            <Button BackgroundColor="Transparent" x:Name="ShareFile" Clicked="ShareFile_Clicked" Text="Export Guard File" TextColor="#fff" HeightRequest="50" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+                </ScrollView>
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </StackLayout>
 </ContentPage>

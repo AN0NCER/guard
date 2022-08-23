@@ -19,11 +19,13 @@ using Xamarin.Essentials;
 
 namespace Guard
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
         Thread TGUARD; // Thread update Guard Code
 
         SteamGuardAccount _guardAccount; // Guard Account 
+        bool isTradeActive = false;
+        TradeView grid;
 
         public ObservableCollection<UGuard> Guards { get; set; } = new ObservableCollection<UGuard>(); //List Guards Accounts
         public UGuard CurGuard { get; set; } //User Guard Current Selected
@@ -63,9 +65,6 @@ namespace Guard
 
             new Thread(AddItemViews).Start();
         }
-
-
-
         //Getting and updating the passcode
         void GuardSecretCode()
         {
@@ -108,9 +107,10 @@ namespace Guard
             if (!question)
                 return;
 
+            bool refreshSession = _guardAccount.RefreshSession();
             bool answer = _guardAccount.DeactivateAuthenticator();
 
-            if (!answer)
+            if (!answer && refreshSession)
                 return;
 
             answer = IO.RemoveFileByName(CurGuard.AccountName);
@@ -118,11 +118,16 @@ namespace Guard
             if (!answer)
                 return;
 
-            Guards.Remove(CurGuard);
 
-            if (Guards.Count <= 0)
+            if ((Guards.Count - 1) <= 0)
             {
+                TGUARD.Abort();
                 Application.Current.MainPage = new FirstLogin();
+            }
+            else
+            {
+                ItemViewer.Children.Remove(CurGuard.ItemView);
+                Guards.Remove(CurGuard);
             }
         }
 
@@ -209,7 +214,64 @@ namespace Guard
                 });
 
                 if (addGuard != null)
+                {
+                    Dispatcher.BeginInvokeOnMainThread(() => ItemViewer.Children.Add(addGuard.ItemView));
                     Guards.Add(addGuard);
+                }
+
+            }
+        }
+
+
+        bool IsAnimate = false;
+
+
+        //Show Trade Control
+        void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (isTradeActive && IsAnimate)
+                return;
+
+            IsAnimate = true;
+            grid = new TradeView(_guardAccount);
+            ViewContent.Children.Add(grid);
+            SwitchAnimate.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished: (v, c) => IsAnimate = false);
+            isTradeActive = true;
+
+            SwitchButton(sender as Button, GuardBtn);
+        }
+
+        private void GuardBtn_Clicked(object sender, EventArgs e)
+        {
+            if (!isTradeActive && IsAnimate)
+                return;
+
+            IsAnimate = true;
+            SwitchAnimate.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished: (v, c) => { ViewContent.Children.Remove(grid); IsAnimate = false; });
+            isTradeActive = false;
+
+            SwitchButton(sender as Button, TardeBtn);
+        }
+
+        void SwitchButton(Button btn, Button active)
+        {
+            btn.BackgroundColor = active.BackgroundColor;
+            btn.TextColor = active.TextColor;
+            active.BackgroundColor = Color.Transparent;
+            active.TextColor = Color.FromHex("#595D6E");
+        }
+
+        Animation SwitchAnimate
+        {
+            get
+            {
+                Animation animation = new Animation();
+                if (isTradeActive)
+                    animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), 0, grid.Width);
+                else
+                    animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), grid.Width, 0);
+
+                return animation;
             }
         }
     }
