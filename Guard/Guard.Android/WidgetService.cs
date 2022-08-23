@@ -23,12 +23,12 @@ namespace Guard.Droid
         public override void OnStart(Intent intent, int startId)
         {
             // Build the widget update for today
-            RemoteViews updateViews = buildUpdate(this);
+            //RemoteViews updateViews = buildUpdate(this);
 
-            // Push update for this widget to the home screen
-            ComponentName thisWidget = new ComponentName(this, Java.Lang.Class.FromType(typeof(GuardWidgetClass)).Name);//"guard.GuardWidgetClass"
-            AppWidgetManager manager = AppWidgetManager.GetInstance(this);
-            manager.UpdateAppWidget(thisWidget, updateViews);
+            //// Push update for this widget to the home screen
+            //ComponentName thisWidget = new ComponentName(this, Java.Lang.Class.FromType(typeof(GuardWidgetClass)).Name);//"guard.GuardWidgetClass"
+            //AppWidgetManager manager = AppWidgetManager.GetInstance(this);
+            //manager.UpdateAppWidget(thisWidget, updateViews);
         }
 
         public override IBinder OnBind(Intent intent)
