@@ -229,41 +229,50 @@ namespace Guard
         //Show Trade Control
         void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
         {
-            if (!isTradeActive && !IsAnimate)
-            {
-                IsAnimate = true;
-                grid = new TradeView(_guardAccount);
-                ViewContent.Children.Add(grid);
-                Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, grid.Width, 0);
-                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished:(v,c) => IsAnimate = false);
-                isTradeActive = true;
+            if (isTradeActive && IsAnimate)
+                return;
 
-                TardeBtn.BackgroundColor = Color.FromHex("#1C202C");
-                TardeBtn.TextColor = Color.FromHex("#fff");
+            IsAnimate = true;
+            grid = new TradeView(_guardAccount);
+            ViewContent.Children.Add(grid);
+            SwitchAnimate.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished: (v, c) => IsAnimate = false);
+            isTradeActive = true;
 
-                GuardBtn.BackgroundColor = Color.Transparent;
-                GuardBtn.TextColor = Color.FromHex("#595D6E");
-            }   
-            
+            SwitchButton(sender as Button, GuardBtn);
         }
 
         private void GuardBtn_Clicked(object sender, EventArgs e)
         {
-            if (isTradeActive  && !IsAnimate)
-            {
-                IsAnimate = true;
-                Animation animation = new Animation((value) => { grid.Margin = new Thickness(value, 0, 0, 0); }, 0, grid.Width);
-                animation.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished:(v,c) => { ViewContent.Children.Remove(grid); IsAnimate = false;  });
-                isTradeActive = false;
+            if (!isTradeActive && IsAnimate)
+                return;
 
-                TardeBtn.BackgroundColor = Color.Transparent;
-                TardeBtn.TextColor = Color.FromHex("#595D6E");
+            IsAnimate = true;
+            SwitchAnimate.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished: (v, c) => { ViewContent.Children.Remove(grid); IsAnimate = false; });
+            isTradeActive = false;
 
-                GuardBtn.BackgroundColor = Color.FromHex("#1C202C");
-                GuardBtn.TextColor = Color.FromHex("#fff");
-            }
-            
+            SwitchButton(sender as Button, TardeBtn);
         }
 
+        void SwitchButton(Button btn, Button active)
+        {
+            btn.BackgroundColor = active.BackgroundColor;
+            btn.TextColor = active.TextColor;
+            active.BackgroundColor = Color.Transparent;
+            active.TextColor = Color.FromHex("#595D6E");
+        }
+
+        Animation SwitchAnimate
+        {
+            get
+            {
+                Animation animation = new Animation();
+                if (isTradeActive)
+                    animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), 0, grid.Width);
+                else
+                    animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), grid.Width, 0);
+
+                return animation;
+            }
+        }
     }
 }
