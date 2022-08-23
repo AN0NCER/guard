@@ -24,7 +24,7 @@
         android:textSize="60dp"
         android:id="@+id/Code"
         android:textColor="#979AA3"
-        android:text="N5KCV"/>
+        android:text="00000"/>
 
     <ProgressBar 
         android:progress="100"
