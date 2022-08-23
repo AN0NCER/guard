@@ -229,7 +229,7 @@ namespace Guard
         //Show Trade Control
         void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
         {
-            if (isTradeActive && IsAnimate)
+            if (isTradeActive || IsAnimate)
                 return;
 
             IsAnimate = true;
