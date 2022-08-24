@@ -17,6 +17,7 @@ using System.Collections.Specialized;
 using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
 using System.Windows.Input;
+using Guard.Interface;
 
 namespace Guard
 {
@@ -274,27 +275,8 @@ namespace Guard
         //Copy Guard Code
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            ITacktile tacktile = DependencyService.Get<ITacktile>();
-            tacktile.Tacktile();
+            DependencyService.Get<ITacktile>().Tacktile();
             await Clipboard.SetTextAsync(CurGuard.SecretCode);
-            /*try
-            {
-                // Use default vibration length
-                Vibration.Vibrate(250);
-            }
-            catch (FeatureNotSupportedException ex)
-            {
-                // Feature not supported on device
-            }
-            catch (Exception ex)
-            {
-                // Other error has occurred.
-            }*/
         }
-    }
-
-    public interface ITacktile
-    {
-        void Tacktile();
     }
 }

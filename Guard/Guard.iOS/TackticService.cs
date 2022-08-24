@@ -1,5 +1,4 @@
-﻿using System;
-using Guard;
+﻿using Guard.Interface;
 using Guard.iOS;
 using UIKit;
 
