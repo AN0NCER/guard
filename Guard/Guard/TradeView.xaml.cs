@@ -24,7 +24,7 @@ namespace Guard
             _guardAccount = uGuard;
             _econService = new IEconService(_guardAccount.Session);
             _steamUser = new ISteamUser(_guardAccount.Session);
-            new Thread(RefreshConfirmations).Start();
+            RefreshTrade.IsRefreshing = true;
         }
 
         void ClickGestureRecognizer_Clicked(System.Object sender, System.EventArgs e)
@@ -56,7 +56,6 @@ namespace Guard
 
         void RefreshConfirmations()
         {
-            Dispatcher.BeginInvokeOnMainThread(() => RefreshTrade.IsRefreshing = true);
             Confirmations.Clear();
             bool refreshing = _guardAccount.RefreshSession();
             if (!refreshing)
