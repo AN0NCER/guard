@@ -16,6 +16,7 @@ using SteamAuth;
 using System.Collections.Specialized;
 using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
+using System.Windows.Input;
 
 namespace Guard
 {
@@ -94,11 +95,6 @@ namespace Guard
             TGUARD = new Thread(GuardSecretCode);
             TGUARD.Start();
         }
-
-        //Copy Guard Code
-        async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e) =>
-            await Clipboard.SetTextAsync(CurGuard.SecretCode);
-
 
         //Remove Guard Auth
         async void RemAuth_Clicked(System.Object sender, System.EventArgs e)
@@ -272,6 +268,24 @@ namespace Guard
                     animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), grid.Width, 0);
 
                 return animation;
+            }
+        }
+        //Copy Guard Code
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Clipboard.SetTextAsync(CurGuard.SecretCode);
+            try
+            {
+                // Use default vibration length
+                Vibration.Vibrate(250);
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                // Feature not supported on device
+            }
+            catch (Exception ex)
+            {
+                // Other error has occurred.
             }
         }
     }

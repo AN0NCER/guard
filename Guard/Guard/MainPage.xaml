@@ -33,16 +33,15 @@
                     </yummy:PancakeView.BackgroundGradientStops>
                     <Grid>
                         <Image Source="GridBG.png" Aspect="AspectFill" Margin="-40"/>
+
                         <CarouselView ItemsSource="{Binding Guards}" CurrentItem="{Binding CurGuard}" x:Name="GuardCarouse" CurrentItemChanged="GuardCarouse_CurrentItemChanged"  HorizontalScrollBarVisibility="Never" VerticalOptions="Center" HorizontalOptions="Center">
-                            <CarouselView.GestureRecognizers>
-                                <TapGestureRecognizer
-                            Tapped="TapGestureRecognizer_Tapped"
-                            NumberOfTapsRequired="1" />
-                            </CarouselView.GestureRecognizers>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
                                         <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                                            </StackLayout.GestureRecognizers>
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                                 <Label Text="Logged in as" FontSize="12" TextColor="#80FFFFFF" />
                                                 <Label Text="{Binding AccountName}" FontSize="12" FontAttributes="Bold" TextColor="#80FFFFFF" />
