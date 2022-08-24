@@ -270,11 +270,14 @@ namespace Guard
                 return animation;
             }
         }
+
         //Copy Guard Code
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+            ITacktile tacktile = DependencyService.Get<ITacktile>();
+            tacktile.Tacktile();
             await Clipboard.SetTextAsync(CurGuard.SecretCode);
-            try
+            /*try
             {
                 // Use default vibration length
                 Vibration.Vibrate(250);
@@ -286,7 +289,12 @@ namespace Guard
             catch (Exception ex)
             {
                 // Other error has occurred.
-            }
+            }*/
         }
+    }
+
+    public interface ITacktile
+    {
+        void Tacktile();
     }
 }
