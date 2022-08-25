@@ -27,8 +27,16 @@ namespace Guard
             RefreshTrade.IsRefreshing = true;
         }
 
-        void ClickGestureRecognizer_Clicked(System.Object sender, System.EventArgs e)
+        async void ClickGestureRecognizer_Clicked(System.Object sender, System.EventArgs e)
         {
+            var navigationPage = new NavigationPage(new TradeInfo());
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
+                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
+                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
+            }
+            await Navigation.PushModalAsync(navigationPage);
         }
 
         void RefreshView_Refreshing(System.Object sender, System.EventArgs e)
