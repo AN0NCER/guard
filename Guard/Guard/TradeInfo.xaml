@@ -1,7 +1,94 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Guard.TradeInfo" NavigationPage.HasNavigationBar="False">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BackgroundColor="#1C202C"
+    x:Class="Guard.TradeInfo"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackLayout Orientation="Vertical" Grid.Row="0">
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="Policeman" TextColor="#ffffff" Grid.Column="0" FontSize="20" FontAttributes="Bold" Margin="10,0,0,0" />
+                <yummy:PancakeView VerticalOptions="Center" HorizontalOptions="End" Grid.Column="1" Margin="0,0,10,0" CornerRadius="5">
+                    <Image Source="https://avatars.cloudflare.steamstatic.com/fa1ba384b5ce11790c7c85157311ba3fb0e394b7_full.jpg"   HeightRequest="30" WidthRequest="30" />
+                </yummy:PancakeView>
+            </Grid>
+            <yummy:PancakeView >
+                <Grid>
+                    <Image Source="https://cdn.cloudflare.steamstatic.com/steam/apps/753/header.jpg" HeightRequest="210" Aspect="AspectFill" />
+                    <yummy:PancakeView BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="0,1">
+                        <yummy:PancakeView.BackgroundGradientStops>
+                            <yummy:GradientStopCollection>
+                                <yummy:GradientStop Color="#1C202C" Offset="0" />
+                                <yummy:GradientStop Color="#001C202C" Offset="0.2" />
+                                <yummy:GradientStop Color="#001C202C" Offset="0.8" />
+                                <yummy:GradientStop Color="#1C202C" Offset="1" />
+                            </yummy:GradientStopCollection>
+                        </yummy:PancakeView.BackgroundGradientStops>
+
+                    </yummy:PancakeView>
+                </Grid>
+            </yummy:PancakeView>
+            <Label Text="Beholder 3 Trading Card" FontSize="18" FontAttributes="Bold" TextColor="#ffffff" Margin="10,-10,0,0" />
+            <Label Text="I do my job and I do it better than anyone else." FontSize="18" TextColor="#50FFFFFF" Margin="10,5,0,0" />
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Horizontal" Margin="10,5,0,0">
+                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
+                        <Label Text="Common" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
+                    </yummy:PancakeView>
+                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
+                        <Label Text="Beholder 3" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
+                    </yummy:PancakeView>
+                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
+                        <Label Text="Normal" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
+                    </yummy:PancakeView>
+                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
+                        <Label Text="Trading Card" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
+                    </yummy:PancakeView>
+                </StackLayout>
+            </ScrollView>
+            <yummy:PancakeView Padding="10, 12" CornerRadius="5" Margin="10,10,10,5" Background="#30354A">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Status" TextColor="#828282" FontSize="14" FontAttributes="Bold"/>
+                    <Label Text="Created Needs Confirmation" Grid.Column="1" HorizontalOptions="End" TextColor="#ffffff" FontSize="14" FontAttributes="Bold"/>
+                </Grid>
+            </yummy:PancakeView>
+            <yummy:PancakeView Padding="10, 12" CornerRadius="5" Margin="10,0,10,5" Background="#30354A">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Expiration" TextColor="#828282" FontSize="14" FontAttributes="Bold"/>
+                    <Label Text="00:10" Grid.Column="1" HorizontalOptions="End" TextColor="#ffffff" FontSize="14" FontAttributes="Bold"/>
+                </Grid>
+            </yummy:PancakeView>
+            <yummy:PancakeView Padding="10, 4" CornerRadius="5" Margin="10,0,10,5" Background="#30354A">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalTextAlignment="Center" Text="Image" TextColor="#828282" FontSize="14" FontAttributes="Bold"/>
+                    <Image Source="http://cdn.steamcommunity.com/economy/image/IzMF03bk9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdA3g5gMEPvUZZEfSMJ6dESN8p_2SVTY7V2NgKw3MMnz4QPivs0XEwVepgMcjDzQT15-uAHXPyNWXGLXCKTw05G-cNMDnfrzv347-SRGrMQO0sSlwCf6IFp2RJOJrcOxUjjsdc7We3hUB4DCkhf8RBdVK_nCZDNL9ymSUXcJtRniD5d5bahlc3aUFsU77iAu3Fa4all34mW05kAeBEM53TtScarCd9CQ" Grid.Column="1" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="End" />
+                </Grid>
+            </yummy:PancakeView>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Grid.Row="1" VerticalOptions="End">
+            <Button Text="Accept" TextColor="#fff" BackgroundColor="#56C448" HeightRequest="50"/>
+            <Button Text="Decline" TextColor="#fff" BackgroundColor="#C34548" HeightRequest="50"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>
 
