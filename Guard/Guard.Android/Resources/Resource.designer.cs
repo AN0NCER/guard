@@ -25249,7 +25249,7 @@ namespace Guard.Droid
 			public const int closest = 2131230852;
 			
 			// aapt resource value: 0x7F080005
-			public const int Code = 2131230725;
+			public const int CodeBtn = 2131230725;
 			
 			// aapt resource value: 0x7F080085
 			public const int collapseActionView = 2131230853;

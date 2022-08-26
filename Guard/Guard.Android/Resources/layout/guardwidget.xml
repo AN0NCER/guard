@@ -8,8 +8,6 @@
     android:gravity="center">
 
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,32 +16,22 @@
         android:textColor="#979AA3"
         android:text="Logged in as user"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="60dp"
-        android:id="@+id/Code"
+        android:textSize="55dp"
+        android:id="@+id/CodeBtn"
         android:textColor="#979AA3"
+        android:background="#00FFFFFF"
         android:text="00000"/>
 
     <ProgressBar 
-        android:progress="100"
+        android:progress="0"
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:foreground="#3F6CB0" 
-        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="10dp"/>
-
-    <!--
-    <ImageView
-        android:src="@drawable/gridbg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView1"/>-->
-
-
-
+        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="5dp"/>
 
 
 </LinearLayout>
