@@ -5,6 +5,7 @@ using System.Threading;
 using Guard.CData;
 using SteamAuth;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 
 namespace Guard
 {
@@ -29,7 +30,9 @@ namespace Guard
 
         async void ClickGestureRecognizer_Clicked(System.Object sender, System.EventArgs e)
         {
-            var navigationPage = new NavigationPage(new TradeInfo());
+            PancakeView item = sender as PancakeView;
+            UTrade trade = item.BindingContext as UTrade;
+            var navigationPage = new NavigationPage(new TradeInfo(trade));
             if (Device.RuntimePlatform == Device.iOS)
             {
                 Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
