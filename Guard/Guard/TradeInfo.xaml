@@ -17,7 +17,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="{Binding MarketName}" TextColor="#ffffff" Grid.Column="0" FontSize="20" FontAttributes="Bold" Margin="10,0,0,0" />
                 <yummy:PancakeView VerticalOptions="Center" HorizontalOptions="End" Grid.Column="1" Margin="0,0,10,0" CornerRadius="5">
-                    <Image Source="https://avatars.cloudflare.steamstatic.com/fa1ba384b5ce11790c7c85157311ba3fb0e394b7_full.jpg"   HeightRequest="30" WidthRequest="30" />
+                    <Image Source="{Binding Avatar}"   HeightRequest="30" WidthRequest="30" />
                 </yummy:PancakeView>
             </Grid>
             <yummy:PancakeView >
@@ -39,20 +39,7 @@
             <Label Text="{Binding Type}" FontSize="18" FontAttributes="Bold" TextColor="#ffffff" Margin="10,-10,0,0" />
             <Label Text="{Binding DescriptionValue}" FontSize="18" TextColor="#50FFFFFF" Margin="10,5,0,0" />
             <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                <StackLayout Orientation="Horizontal" Margin="10,5,0,0">
-                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
-                        <Label Text="Common" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
-                    </yummy:PancakeView>
-                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
-                        <Label Text="Beholder 3" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
-                    </yummy:PancakeView>
-                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
-                        <Label Text="Normal" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
-                    </yummy:PancakeView>
-                    <yummy:PancakeView Padding="10,7" BackgroundColor="#3F6CB0" CornerRadius="5" Margin="0,0,5,0">
-                        <Label Text="Trading Card" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" />
-                    </yummy:PancakeView>
-                </StackLayout>
+                <StackLayout x:Name="TagViews" Orientation="Horizontal" Margin="10,5,0,0" />
             </ScrollView>
             <yummy:PancakeView Padding="10, 12" CornerRadius="5" Margin="10,10,10,5" Background="#30354A">
                 <Grid>
@@ -61,7 +48,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label Text="Status" TextColor="#828282" FontSize="14" FontAttributes="Bold"/>
-                    <Label Text="Created Needs Confirmation" Grid.Column="1" HorizontalOptions="End" TextColor="#ffffff" FontSize="14" FontAttributes="Bold"/>
+                    <Label Text="{Binding TradeOfferState}" Grid.Column="1" HorizontalOptions="End" TextColor="#ffffff" FontSize="14" FontAttributes="Bold"/>
                 </Grid>
             </yummy:PancakeView>
             <yummy:PancakeView Padding="10, 12" CornerRadius="5" Margin="10,0,10,5" Background="#30354A">
@@ -71,7 +58,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label Text="Expiration" TextColor="#828282" FontSize="14" FontAttributes="Bold"/>
-                    <Label Text="00:10" Grid.Column="1" HorizontalOptions="End" TextColor="#ffffff" FontSize="14" FontAttributes="Bold"/>
+                    <Label x:Name="ExpirationValue" Text="00:00:00" Grid.Column="1" HorizontalOptions="End" TextColor="#ffffff" FontSize="14" FontAttributes="Bold"/>
                 </Grid>
             </yummy:PancakeView>
             <yummy:PancakeView Padding="10, 4" CornerRadius="5" Margin="10,0,10,5" Background="#30354A">
@@ -81,7 +68,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label VerticalTextAlignment="Center" Text="Image" TextColor="#828282" FontSize="14" FontAttributes="Bold"/>
-                    <Image Source="http://cdn.steamcommunity.com/economy/image/IzMF03bk9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdA3g5gMEPvUZZEfSMJ6dESN8p_2SVTY7V2NgKw3MMnz4QPivs0XEwVepgMcjDzQT15-uAHXPyNWXGLXCKTw05G-cNMDnfrzv347-SRGrMQO0sSlwCf6IFp2RJOJrcOxUjjsdc7We3hUB4DCkhf8RBdVK_nCZDNL9ymSUXcJtRniD5d5bahlc3aUFsU77iAu3Fa4all34mW05kAeBEM53TtScarCd9CQ" Grid.Column="1" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="End" />
+                    <Image Source="{ Binding IconUrl, StringFormat='http://cdn.steamcommunity.com/economy/image/{0:0}'}" Grid.Column="1" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="End" />
                 </Grid>
             </yummy:PancakeView>
         </StackLayout>
