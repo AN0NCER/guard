@@ -1,5 +1,4 @@
-﻿using Android;
-using Android.App;
+﻿using Android.App;
 using Android.Appwidget;
 using Android.Content;
 using Android.OS;
@@ -13,16 +12,12 @@ using System.IO;
 namespace Guard.Droid
 {
     [BroadcastReceiver(Label = "GuardWidget", Icon = "@mipmap/ic_launcher_round", Exported = false)]
-
     [IntentFilter(new string[] { "android.appwidget.action.APPWIDGET_UPDATE" })]
-    //[IntentFilter(new string[] { "android.appwidget.action.APPWIDGET_DISABLED" })]
-    //[IntentFilter(new string[] { "android.appwidget.action.APPWIDGET_DELETED" })]
-
     [IntentFilter(new string[] { "com.Guard.guard.ACTION_CLOCK_UPDATE" })]
     [MetaData("android.appwidget.provider", Resource = "@xml/guardwidgetprovider")]
     public class GuardWidgetClass : AppWidgetProvider
     {
-        private static SteamGuardAccount steamGuard;
+        private static SteamGuardAccount steamGuard = null;
         private static string GuardUpDate = "com.Guard.OnUpdate";
         private static string CodeBtnTag = "com.Guard.CodeBtn";
 
@@ -30,16 +25,20 @@ namespace Guard.Droid
         {
             base.OnUpdate(context, appWidgetManager, appWidgetIds);
 
-
             RemoteViews views = new RemoteViews(context.PackageName, Resource.Layout.guardwidget);
-            views.SetTextViewText(Resource.Id.CodeBtn, GetCodeGuard());
+
+            views.SetTextViewText(Resource.Id.CodeBtn, GetCodeGuard() == null ? "*****" : GetCodeGuard());
             views.SetOnClickPendingIntent(Resource.Id.CodeBtn, createPendingIntent(context, CodeBtnTag));
+
             appWidgetManager.UpdateAppWidget(appWidgetIds, views);
 
         }
         public override void OnReceive(Context context, Intent intent)
         {
             base.OnReceive(context, intent);
+
+            if (steamGuard == null)
+                return;
 
             if (intent.Action.Equals(GuardUpDate))
             {
@@ -55,22 +54,37 @@ namespace Guard.Droid
                 ClipboardManager clipboardManager = context.GetSystemService(Context.ClipboardService) as ClipboardManager;
                 ClipData clip = ClipData.NewPlainText("label", GetCodeGuard());
                 clipboardManager.PrimaryClip = clip;
-                Toast.MakeText(context, "Copy!", ToastLength.Short).Show();
 
+                Toast.MakeText(context, "Copy!", ToastLength.Short).Show();
+                
             }
         }
         public override void OnEnabled(Context context)
         {
             base.OnEnabled(context);
-            StartRepeating(context);
+            if(GetCodeGuard() == null)
+                Toast.MakeText(context, "Account not found!", ToastLength.Long).Show();
+            else
+            {
+                RemoteViews views = new RemoteViews(context.PackageName, Resource.Layout.guardwidget);
+                views.SetTextViewText(Resource.Id.AccauntName, $"Logged in as user {steamGuard.AccountName}");
+
+                ComponentName appWidgets = new ComponentName(context, Java.Lang.Class.FromType(typeof(GuardWidgetClass)));
+                AppWidgetManager appWidgetManager = AppWidgetManager.GetInstance(context);
+                int[] ids = appWidgetManager.GetAppWidgetIds(appWidgets);
+
+                appWidgetManager.UpdateAppWidget(ids, views);
+
+                StartRepeating(context);
+            }
         }
+
         public override void OnDisabled(Context context)
         {
             base.OnDisabled(context);
             //Stop Repeating
             AlarmManager alarmManager = context.GetSystemService(Context.AlarmService) as AlarmManager;
             alarmManager.Cancel(createPendingIntent(context, GuardUpDate));
-            
         }
 
         private void StartRepeating(Context context)
@@ -82,12 +96,21 @@ namespace Guard.Droid
         
         private string GetCodeGuard()
         {
-            if (steamGuard == null)
+            try
             {
-                List<string> files = IO.Files;
-                steamGuard = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(files[0]));
+                if (steamGuard == null)
+                {
+                    List<string> files = IO.Files;
+                    steamGuard = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(files[0]));
+                }
+                return steamGuard.GenerateSteamGuardCode();
             }
-            return steamGuard.GenerateSteamGuardCode();
+            catch 
+            {
+                steamGuard = null;
+                return null;
+            }
+
         }
     }
 }

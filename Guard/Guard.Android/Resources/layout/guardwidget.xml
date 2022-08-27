@@ -19,19 +19,19 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="55dp"
+        android:textSize="52dp"
         android:id="@+id/CodeBtn"
         android:textColor="#979AA3"
         android:background="#00FFFFFF"
         android:text="00000"/>
 
-    <ProgressBar 
+    <!--<ProgressBar 
         android:progress="0"
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="5dp"/>
+        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="5dp"/>-->
 
 
 </LinearLayout>
