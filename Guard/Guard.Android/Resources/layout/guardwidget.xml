@@ -7,8 +7,7 @@
     android:background="#2F3548"
     android:gravity="center">
 
-
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12dp"
@@ -24,6 +23,7 @@
         android:textColor="#979AA3"
         android:background="#00FFFFFF"
         android:text="00000"/>
+
 
     <!--<ProgressBar 
         android:progress="0"

@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Appwidget;
 using Android.Content;
+using Android.Media;
 using Android.OS;
 using Android.Widget;
 using Guard.Library;
@@ -18,8 +19,8 @@ namespace Guard.Droid
     public class GuardWidgetClass : AppWidgetProvider
     {
         private static SteamGuardAccount steamGuard = null;
-        private static string GuardUpDate = "com.Guard.OnUpdate";
-        private static string CodeBtnTag = "com.Guard.CodeBtn";
+        private const string GuardUpDate = "com.Guard.OnUpdate";
+        private const string CodeBtnTag = "com.Guard.CodeBtn";
 
         public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
         {
@@ -56,7 +57,8 @@ namespace Guard.Droid
                 clipboardManager.PrimaryClip = clip;
 
                 Toast.MakeText(context, "Copy!", ToastLength.Short).Show();
-                
+                Vibration(context);
+
             }
         }
         public override void OnEnabled(Context context)
@@ -111,6 +113,13 @@ namespace Guard.Droid
                 return null;
             }
 
+        }
+        private void Vibration(Context context)
+        {
+            Vibrator v = (Vibrator)context.GetSystemService(Context.VibratorService);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder().SetContentType(AudioContentType.Sonification).SetUsage(AudioUsageKind.Alarm).Build();
+            VibrationEffect ve = VibrationEffect.CreateOneShot(200, 50);
+            v.Vibrate(ve, audioAttributes);
         }
     }
 }
