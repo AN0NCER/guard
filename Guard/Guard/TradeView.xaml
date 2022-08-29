@@ -42,7 +42,7 @@
                                                         <Frame HasShadow="False" Padding="0" Margin="10,0,0,0" CornerRadius="15" WidthRequest="30" HeightRequest="30" IsClippedToBounds="True" VerticalOptions="Center">
                                                             <Image Source="{Binding AccountNames.NameAccount.Avatar.AbsoluteUri}" />
                                                         </Frame>
-                                                        <Label Margin="5,0,0,0" TextColor="#fff" Text="{Binding AccountNames.NameAccount.Personaname}" FontSize="14" VerticalOptions="Center" />
+                                                        <Label Margin="5,0" LineBreakMode="TailTruncation" TextColor="#fff" Text="{Binding AccountNames.NameAccount.Personaname}" FontSize="14" VerticalOptions="Center" />
                                                     </StackLayout>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
@@ -50,8 +50,8 @@
 
                                                 </Grid>
                                                 <Grid Grid.Column="2" HorizontalOptions="End">
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Margin="0,0,5,0" TextColor="#fff" Text="{Binding AccountNames.NameOther.Personaname}" FontSize="14" VerticalOptions="Center" />
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                                        <Label Margin="5,0" LineBreakMode="TailTruncation"  TextColor="#fff" Text="{Binding AccountNames.NameOther.Personaname}" FontSize="14" HorizontalOptions="End" VerticalOptions="Center" />
                                                         <Frame HasShadow="False" Padding="0" Margin="0,0,10,0" CornerRadius="15" WidthRequest="30" HeightRequest="30" IsClippedToBounds="True" VerticalOptions="Center">
                                                             <Image Source="{Binding AccountNames.NameOther.Avatar.AbsoluteUri}" />
                                                         </Frame>

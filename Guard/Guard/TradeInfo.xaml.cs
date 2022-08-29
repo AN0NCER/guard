@@ -107,13 +107,21 @@ namespace Guard
 
         public void Expiration(long exp)
         {
-            DateTime time = new DateTime(exp, DateTimeKind.Utc);
+            DateTime time = UnixTimeStampToDateTime(exp);
             while ((time - DateTime.Now) != TimeSpan.Zero)
             {
                 var t = DateTime.Now.Subtract(time);
                 Dispatcher.BeginInvokeOnMainThread(() => ExpirationValue.Text = t.ToString(@"hh\:mm\:ss"));
                 Thread.Sleep(1000);
             }
+        }
+
+        public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTime;
         }
     }
 }
