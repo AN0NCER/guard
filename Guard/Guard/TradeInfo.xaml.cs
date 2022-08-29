@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using Guard.CData;
+using SteamAuth;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.PancakeView;
@@ -11,6 +13,9 @@ namespace Guard
 {
     public partial class TradeInfo : ContentPage
     {
+        private SteamGuardAccount _guardAccount;
+        private UTrade _uTrade;
+
         public string MarketName { get; set; } = "NULL";
         public long Appid { get; set; } = 753;
         public string Type { get; set; } = "NULL";
@@ -21,9 +26,11 @@ namespace Guard
 
         public Thread threadExpiration { get; set; }
 
-        public TradeInfo(UTrade uTrade)
+        public TradeInfo(UTrade uTrade, ref SteamGuardAccount guardAccount)
         {
             InitializeComponent();
+            _guardAccount = guardAccount;
+            _uTrade = uTrade;
             MarketName = uTrade.Response.Descriptions[0].MarketName;
             Appid = uTrade.Response.Descriptions[0].Appid;
             Type = uTrade.Response.Descriptions[0].Type;
@@ -122,6 +129,20 @@ namespace Guard
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTime;
+        }
+
+        async void btnAccept_Clicked(System.Object sender, System.EventArgs e)
+        {
+            bool denyConfirmation = _guardAccount.DenyConfirmation(_uTrade.Confirmation);
+            if (denyConfirmation)
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        async void btnDecline_Clicked(System.Object sender, System.EventArgs e)
+        {
+            bool denyConfirmation = _guardAccount.AcceptConfirmation(_uTrade.Confirmation);
+            if (denyConfirmation)
+                await Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 }

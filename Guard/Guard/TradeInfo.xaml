@@ -73,8 +73,8 @@
             </yummy:PancakeView>
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Row="1" VerticalOptions="End">
-            <Button Text="Accept" TextColor="#fff" BackgroundColor="#56C448" HeightRequest="50"/>
-            <Button Text="Decline" TextColor="#fff" BackgroundColor="#C34548" HeightRequest="50"/>
+            <Button x:Name="btnAccept" Clicked="btnAccept_Clicked" Text="Accept" TextColor="#fff" BackgroundColor="#56C448" HeightRequest="50"/>
+            <Button x:Name="btnDecline" Clicked="btnDecline_Clicked" Text="Decline" TextColor="#fff" BackgroundColor="#C34548" HeightRequest="50"/>
         </StackLayout>
     </Grid>
 </ContentPage>

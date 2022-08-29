@@ -11,9 +11,9 @@ namespace Guard
 {
     public partial class TradeView : ContentView
     {
-        SteamGuardAccount _guardAccount { get; set; } // Guard Account
-        IEconService _econService { get; set; } //Trade Functions
-        ISteamUser _steamUser { get; set; } //Steam User Information
+        private SteamGuardAccount _guardAccount; // Guard Account
+        private IEconService _econService; //Trade Functions
+        private ISteamUser _steamUser; //Steam User Information
 
 
         public ObservableCollection<UTrade> Confirmations { get; set; } = new ObservableCollection<UTrade>();
@@ -32,7 +32,7 @@ namespace Guard
         {
             PancakeView item = sender as PancakeView;
             UTrade trade = item.BindingContext as UTrade;
-            var navigationPage = new NavigationPage(new TradeInfo(trade));
+            var navigationPage = new NavigationPage(new TradeInfo(trade, ref _guardAccount));
             if (Device.RuntimePlatform == Device.iOS)
             {
                 Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
