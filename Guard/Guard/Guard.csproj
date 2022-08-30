@@ -17,6 +17,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Newtonsoft.Json" />
@@ -26,6 +27,7 @@
     <None Remove="CPopup\" />
     <None Remove="Library\" />
     <None Remove="CData\" />
+    <None Remove="ZXing.Net.Mobile.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CPopup\" />
