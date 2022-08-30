@@ -278,5 +278,10 @@ namespace Guard
             DependencyService.Get<ITacktile>().Tacktile();
             await Clipboard.SetTextAsync(CurGuard.SecretCode);
         }
+
+        void SettingBtn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            //This action show settings
+        }
     }
 }

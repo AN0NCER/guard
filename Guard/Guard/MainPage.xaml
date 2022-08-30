@@ -7,11 +7,24 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              ios:Page.PrefersStatusBarHidden="True" >
     <StackLayout Orientation="Vertical">
-        <StackLayout Orientation="Horizontal" Margin="20,20,20,0">
+        <Grid Margin="20,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="steam.png" Margin="0,0,10,0" WidthRequest="21" />
+                <Label Text="Steam" TextColor="#fff" FontSize="24" FontAttributes="Bold" />
+                <Label Text="Safety" TextColor="#fff" FontSize="24" />
+            </StackLayout>
+            <ImageButton x:Name="SettingBtn" Clicked="SettingBtn_Clicked" Grid.Column="1" Source="setting.png" WidthRequest="20" HorizontalOptions="End" Background="Transparent" />
+        </Grid>
+        <!--Stack Layout to Grid 2 column-->
+        <!--<StackLayout Orientation="Horizontal" Margin="20,20,20,0">
             <Image Source="steam.png" Margin="0,0,10,0" WidthRequest="21" />
             <Label Text="Steam" TextColor="#fff" FontSize="24" FontAttributes="Bold" />
             <Label Text="Safety" TextColor="#fff" FontSize="24" />
-        </StackLayout>
+        </StackLayout>-->
         <yummy:PancakeView BackgroundColor="#30354A" HeightRequest="40" MinimumHeightRequest="40" Margin="20,10,20,0" CornerRadius="5">
             <Grid>
                 <Grid.ColumnDefinitions>
