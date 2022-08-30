@@ -279,9 +279,17 @@ namespace Guard
             await Clipboard.SetTextAsync(CurGuard.SecretCode);
         }
 
-        void SettingBtn_Clicked(System.Object sender, System.EventArgs e)
+        async void SettingBtn_Clicked(System.Object sender, System.EventArgs e)
         {
-            //This action show settings
+            var navigationPage = new NavigationPage(new SettingPage());
+            navigationPage.Disappearing += NavigationPage_Disappearing;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
+                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
+                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
+            }
+            await Navigation.PushModalAsync(navigationPage);
         }
     }
 }
