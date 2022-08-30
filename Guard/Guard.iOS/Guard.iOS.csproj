@@ -150,5 +150,6 @@
     <BundleResource Include="Resources\steam.png" />
     <BundleResource Include="Resources\swap.png" />
     <BundleResource Include="Resources\iconFile.png" />
+    <BundleResource Include="Resources\setting.png" />
   </ItemGroup>
 </Project>
