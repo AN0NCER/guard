@@ -30,6 +30,7 @@ namespace Guard.Droid
 
             views.SetTextViewText(Resource.Id.CodeBtn, GetCodeGuard() == null ? "*****" : GetCodeGuard());
             views.SetOnClickPendingIntent(Resource.Id.CodeBtn, createPendingIntent(context, CodeBtnTag));
+            views.SetTextViewText(Resource.Id.AccauntName, $"Logged in as user " + (steamGuard == null ? "*****" : steamGuard.AccountName));
 
             appWidgetManager.UpdateAppWidget(appWidgetIds, views);
 
@@ -67,18 +68,7 @@ namespace Guard.Droid
             if(GetCodeGuard() == null)
                 Toast.MakeText(context, "Account not found!", ToastLength.Long).Show();
             else
-            {
-                RemoteViews views = new RemoteViews(context.PackageName, Resource.Layout.guardwidget);
-                views.SetTextViewText(Resource.Id.AccauntName, $"Logged in as user {steamGuard.AccountName}");
-
-                ComponentName appWidgets = new ComponentName(context, Java.Lang.Class.FromType(typeof(GuardWidgetClass)));
-                AppWidgetManager appWidgetManager = AppWidgetManager.GetInstance(context);
-                int[] ids = appWidgetManager.GetAppWidgetIds(appWidgets);
-
-                appWidgetManager.UpdateAppWidget(ids, views);
-
                 StartRepeating(context);
-            }
         }
 
         public override void OnDisabled(Context context)
