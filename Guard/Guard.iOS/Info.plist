@@ -22,7 +22,7 @@
 	<key>CFBundleName</key>
 	<string>Guard</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>UIDeviceFamily</key>
@@ -35,8 +35,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -57,7 +55,9 @@
 			<key>UTTypeDescription</key>
 			<string>Guard Account</string>
 			<key>UTTypeIconFiles</key>
-			<array/>
+			<array>
+				<string>iconFile.png</string>
+			</array>
 			<key>UTTypeIdentifier</key>
 			<string>com.Guard.guard</string>
 			<key>UTTypeTagSpecification</key>
@@ -81,7 +81,9 @@
 			<key>UTTypeDescription</key>
 			<string>Guard Account</string>
 			<key>UTTypeIconFiles</key>
-			<array/>
+			<array>
+				<string>iconFile.png</string>
+			</array>
 			<key>UTTypeIdentifier</key>
 			<string>com.Guard.guard</string>
 			<key>UTTypeTagSpecification</key>

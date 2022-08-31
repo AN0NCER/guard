@@ -16,6 +16,8 @@ using SteamAuth;
 using System.Collections.Specialized;
 using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
+using System.Windows.Input;
+using Guard.Interface;
 
 namespace Guard
 {
@@ -24,6 +26,8 @@ namespace Guard
         Thread TGUARD; // Thread update Guard Code
 
         SteamGuardAccount _guardAccount; // Guard Account 
+        bool isTradeActive = false;
+        TradeView grid;
 
         public ObservableCollection<UGuard> Guards { get; set; } = new ObservableCollection<UGuard>(); //List Guards Accounts
         public UGuard CurGuard { get; set; } //User Guard Current Selected
@@ -92,11 +96,6 @@ namespace Guard
             TGUARD = new Thread(GuardSecretCode);
             TGUARD.Start();
         }
-
-        //Copy Guard Code
-        async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e) =>
-            await Clipboard.SetTextAsync(CurGuard.SecretCode);
-
 
         //Remove Guard Auth
         async void RemAuth_Clicked(System.Object sender, System.EventArgs e)
@@ -216,8 +215,81 @@ namespace Guard
                     Dispatcher.BeginInvokeOnMainThread(() => ItemViewer.Children.Add(addGuard.ItemView));
                     Guards.Add(addGuard);
                 }
-                    
+
             }
+        }
+
+
+        bool IsAnimate = false;
+
+
+        //Show Trade Control
+        void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (isTradeActive || IsAnimate)
+                return;
+
+            IsAnimate = true;
+            grid = new TradeView(_guardAccount);
+            ViewContent.Children.Add(grid);
+            SwitchAnimate.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished: (v, c) => IsAnimate = false);
+            isTradeActive = true;
+
+            SwitchButton(sender as Button, GuardBtn);
+        }
+
+        private void GuardBtn_Clicked(object sender, EventArgs e)
+        {
+            if (!isTradeActive || IsAnimate)
+                return;
+
+            IsAnimate = true;
+            SwitchAnimate.Commit(this, "view", length: 250, easing: Easing.SinInOut, finished: (v, c) => { ViewContent.Children.Remove(grid); IsAnimate = false; });
+            isTradeActive = false;
+
+            SwitchButton(sender as Button, TardeBtn);
+        }
+
+        void SwitchButton(Button btn, Button active)
+        {
+            btn.BackgroundColor = active.BackgroundColor;
+            btn.TextColor = active.TextColor;
+            active.BackgroundColor = Color.Transparent;
+            active.TextColor = Color.FromHex("#595D6E");
+        }
+
+        Animation SwitchAnimate
+        {
+            get
+            {
+                Animation animation = new Animation();
+                if (isTradeActive)
+                    animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), 0, grid.Width);
+                else
+                    animation = new Animation((v) => grid.Margin = new Thickness(v, 0, 0, 0), grid.Width, 0);
+
+                return animation;
+            }
+        }
+
+        //Copy Guard Code
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            DependencyService.Get<ITacktile>().Tacktile();
+            await Clipboard.SetTextAsync(CurGuard.SecretCode);
+        }
+
+        async void SettingBtn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            var navigationPage = new NavigationPage(new SettingPage());
+            navigationPage.Disappearing += NavigationPage_Disappearing;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
+                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
+                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
+            }
+            await Navigation.PushModalAsync(navigationPage);
         }
     }
 }

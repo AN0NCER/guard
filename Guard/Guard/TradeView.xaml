@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#1C202C"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    ios:Page.PrefersStatusBarHidden="True"
+    x:Class="Guard.TradeView">
+    <StackLayout Orientation="Vertical">
+        <Label Text="Confirmations" HorizontalOptions="Center" Margin="0,10,0,5" TextColor="#595D6E" />
+        <RefreshView x:Name="RefreshTrade" RefreshColor="#31BCEC" Refreshing="RefreshView_Refreshing">
+            <ScrollView Margin="15,0" VerticalScrollBarVisibility="Never">
+                <StackLayout x:Name="StackLayoutScreen" Orientation="Vertical">
+                    <CollectionView x:Name="TradesView" ItemsSource="{Binding Confirmations}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <yummy:PancakeView BackgroundColor="#30354A" HeightRequest="50" CornerRadius="5" Margin="0,5">
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ClickGestureRecognizer_Clicked" />
+                                        </yummy:PancakeView.GestureRecognizers>
+                                        <SwipeView>
+                                            <SwipeView.LeftItems>
+                                                <SwipeItems Mode="Reveal">
+                                                    <SwipeItem x:Name="DeclineTrade"  Text="Decline" Invoked="DeclineTrade_Invoked" BackgroundColor="#C34548" />
+                                                </SwipeItems>
+                                            </SwipeView.LeftItems>
+                                            <SwipeView.RightItems>
+                                                <SwipeItems Mode="Reveal">
+                                                    <SwipeItem x:Name="AcceptTrade" Text="Accept" Invoked="AcceptTrade_Invoked" BackgroundColor="#56C448" />
+                                                </SwipeItems>
+                                            </SwipeView.RightItems>
+                                            <Grid HeightRequest="50" BackgroundColor="#30354A">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Frame HasShadow="False" Padding="0" Margin="10,0,0,0" CornerRadius="15" WidthRequest="30" HeightRequest="30" IsClippedToBounds="True" VerticalOptions="Center">
+                                                            <Image Source="{Binding AccountNames.NameAccount.Avatar.AbsoluteUri}" />
+                                                        </Frame>
+                                                        <Label Margin="5,0" LineBreakMode="TailTruncation" TextColor="#fff" Text="{Binding AccountNames.NameAccount.Personaname}" FontSize="14" VerticalOptions="Center" />
+                                                    </StackLayout>
+                                                </Grid>
+                                                <Grid Grid.Column="1">
+                                                    <Image Source="swap.png" WidthRequest="15" HeightRequest="15" />
+
+                                                </Grid>
+                                                <Grid Grid.Column="2" HorizontalOptions="End">
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                                        <Label Margin="5,0" LineBreakMode="TailTruncation"  TextColor="#fff" Text="{Binding AccountNames.NameOther.Personaname}" FontSize="14" HorizontalOptions="End" VerticalOptions="Center" />
+                                                        <Frame HasShadow="False" Padding="0" Margin="0,0,10,0" CornerRadius="15" WidthRequest="30" HeightRequest="30" IsClippedToBounds="True" VerticalOptions="Center">
+                                                            <Image Source="{Binding AccountNames.NameOther.Avatar.AbsoluteUri}" />
+                                                        </Frame>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Grid>
+                                        </SwipeView>
+                                    </yummy:PancakeView>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </StackLayout>
+</ContentView>
+

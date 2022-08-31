@@ -5,18 +5,35 @@
 
 # Guard
 
-**Android**, **IOS** application that protects your **Steam** account from theft. An amateur project with a redesigned design.
+<img src="Resorces/iconApp.png" align="left" width="50" />
+
+**Android**, **IOS** application that protects your **Steam** account from theft. An amateur project with a redesigned design. Protect your **Steam** account with this program
 
 ## Functional
 
-- [ ] Steam Guard File Generation  
-- [ ] Have unlimited accounts on one device
-- [ ] Ability to export a file
-- [ ] Ability to import a file
-- [ ] Steam Guard Code Generation
-- [ ] Authorization
-- [ ] Disable Steam Guard from Steam Account
-- [ ] Acceptance, rejection trade
+<img src="Resorces/iphoneExample.png" align="right" width="310" />
+
+- [X] Steam Guard File Generation  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Have unlimited accounts on one device  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Ability to export a file   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Ability to import a file   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Steam Guard Code Generation   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Authorization   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Disable Steam Guard from Steam Account   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) ![BUG](https://img.shields.io/badge/-BUG-critical)
+- [ ] Show Trades
+- [ ] Accept Trade
+- [ ] Decline Trade
+
+## Design
+
+- [X] Page Login   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] Page Guard  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [X] View Item Controls  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) ![BUG](https://img.shields.io/badge/-BUG-critical)
+- [ ] Page Trade
+- [ ] Page Trade Information
+- [X] Page Add Account ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+
+Below are screenshots from IOS, more can be found in [**Figma**](https://www.figma.com/file/NCcKHjj30Wh1UrKvqnby0C/Guard?node-id=0%3A1)
 
 ### Info
 
@@ -24,11 +41,6 @@
 
 ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) - Tested on Android
 
-## Design
+## Image
 
-- [ ] Page Login
-- [ ] Page Guard
-- [ ] Page Trade
-- [ ] Page Add Account
-
-Below are screenshots from IOS, more can be found in [**Figma**](https://www.figma.com/file/NCcKHjj30Wh1UrKvqnby0C/Guard?node-id=0%3A1)
+<img src="Resorces/iphoneTrade.png" align="left" width="200" />
