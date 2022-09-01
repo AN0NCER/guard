@@ -3,15 +3,13 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
-    xmlns:zxingcommand="clr-namespace:ZXing.Common;assembly=zxing.portable"
+    xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing"
     x:Class="Guard.SettingPage" BackgroundColor="Black">
     <StackLayout Orientation="Vertical">
-        <zxing:ZXingBarcodeImageView BarcodeFormat="All_1D" BarcodeValue="Hello World" HeightRequest="400" WidthRequest="400">
+        <zxing:ZXingBarcodeImageView BarcodeValue="Hello World"  BackgroundColor="Transparent" HeightRequest="400" WidthRequest="400">
             <zxing:ZXingBarcodeImageView.BarcodeOptions>
-                <zxingcommand:EncodingOptions Height="400" Width="400" />
-
+                <zxingcommon:EncodingOptions Height="400" Width="400"  />
             </zxing:ZXingBarcodeImageView.BarcodeOptions>
         </zxing:ZXingBarcodeImageView>
-
     </StackLayout>
 </ContentPage>
