@@ -4,12 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing"
-    x:Class="Guard.SettingPage" BackgroundColor="Black">
-    <StackLayout Orientation="Vertical">
-        <zxing:ZXingBarcodeImageView BarcodeValue="Hello World"  BackgroundColor="Transparent" HeightRequest="400" WidthRequest="400">
-            <zxing:ZXingBarcodeImageView.BarcodeOptions>
-                <zxingcommon:EncodingOptions Height="400" Width="400"  />
-            </zxing:ZXingBarcodeImageView.BarcodeOptions>
-        </zxing:ZXingBarcodeImageView>
+    NavigationPage.HasNavigationBar="False"
+    x:Class="Guard.SettingPage" BackgroundColor="#1C202C">
+    <StackLayout Orientation="Vertical" Margin="20">
+        <Button Text="Export from guard" x:Name="btnExport" Clicked="btnExport_Clicked" />
     </StackLayout>
 </ContentPage>
