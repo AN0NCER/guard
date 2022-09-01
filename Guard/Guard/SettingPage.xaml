@@ -6,7 +6,8 @@
     xmlns:zxingcommand="clr-namespace:ZXing.Common;assembly=zxing.portable"
     x:Class="Guard.SettingPage" BackgroundColor="Black">
     <StackLayout Orientation="Vertical">
-        <zxing:ZXingBarcodeImageView BarcodeFormat="All_1D" BarcodeValue="Hello World" HeightRequest="400" WidthRequest="400">
+
+        <zxing:ZXingBarcodeImageView BarcodeFormat="CODE_128" BarcodeValue="Hello World" HeightRequest="400" WidthRequest="400">
             <zxing:ZXingBarcodeImageView.BarcodeOptions>
                 <zxingcommand:EncodingOptions Height="400" Width="400" />
 
