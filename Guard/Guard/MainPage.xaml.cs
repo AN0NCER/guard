@@ -170,19 +170,11 @@ namespace Guard
             });
         }
 
-        //Adding new Account or Export
-        async void AddAuth_Clicked(System.Object sender, System.EventArgs e)
-        {
-            var navigationPage = new NavigationPage(new FirstLogin(true));
-            navigationPage.Disappearing += NavigationPage_Disappearing;
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
-                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
-                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
-            }
-            await Navigation.PushModalAsync(navigationPage);
-        }
+/// <summary>
+/// /
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
 
         private void NavigationPage_Disappearing(object sender, EventArgs e)
         {
@@ -279,9 +271,14 @@ namespace Guard
             await Clipboard.SetTextAsync(CurGuard.SecretCode);
         }
 
-        async void SettingBtn_Clicked(System.Object sender, System.EventArgs e)
+        async void SettingBtn_Clicked(System.Object sender, System.EventArgs e) => await LoadPageAsync(new SettingPage());
+        //Adding new Account or Export
+        async void AddAuth_Clicked(System.Object sender, System.EventArgs e) => await LoadPageAsync(new FirstLogin(true));
+
+        private async Task LoadPageAsync(ContentPage contentPage)
         {
-            var navigationPage = new NavigationPage(new SettingPage());
+
+            var navigationPage = new NavigationPage(contentPage);
             navigationPage.Disappearing += NavigationPage_Disappearing;
             if (Device.RuntimePlatform == Device.iOS)
             {
@@ -291,5 +288,6 @@ namespace Guard
             }
             await Navigation.PushModalAsync(navigationPage);
         }
+
     }
 }

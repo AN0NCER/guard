@@ -122,7 +122,7 @@ namespace Guard
             var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
                     { DevicePlatform.iOS, new[] { "com.Guard.guard" } }, // or general UTType values  
-                    {DevicePlatform.Android , new[] { "application/octet-stream" } }
+                    { DevicePlatform.Android , new[] { "application/octet-stream" } }
             });
             var pickResult = await FilePicker.PickAsync(new PickOptions
             {
