@@ -91,5 +91,16 @@ namespace Guard.Library
 
         public static void UpdateFiles() => _files = GetFiles();
     }
+
+    public static class TestIO
+    {
+
+    }
+
+    public class Account
+    {
+        public string Path { get; set; }
+        public string Name { get; set; }
+    }
 }
 
