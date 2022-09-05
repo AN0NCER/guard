@@ -14,10 +14,16 @@ namespace Guard
 
             Page page = new MainPage();
 
-            if (IO.Files.Count <= 0)
+            if (TestIO.Accounts.Count <= 0)
                 page = new FirstLogin();
-
             ToPage(page);
+
+            //Page page = new MainPage();
+
+            //if (IO.Files.Count <= 0)
+            //    page = new FirstLogin();
+
+            //ToPage(page);
         }
 
         private void ToPage(Page page) => Application.Current.MainPage = page;

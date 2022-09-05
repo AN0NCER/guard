@@ -136,9 +136,11 @@ namespace Guard.Library
 
             Directory.GetFiles(PathGuardFile, $"*{ExtensionGuardFile}").ForEach<string>((x) =>
             {
-                if(!accounts.Exists( e => e.Path == x))
+                if(!accounts.Exists( e => Path.GetFileNameWithoutExtension(e.Path) == Path.GetFileNameWithoutExtension(x)))
                     accounts.Add(AddToList(x));
             });
+
+            UpdateAccounts(accounts);
 
             return accounts;
         }
@@ -148,6 +150,12 @@ namespace Guard.Library
             SteamGuardAccount guardAccount = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(file));
             return new Account { Path = file, Name = guardAccount.AccountName };
         }
+
+        private static void UpdateAccounts(List<Account> accounts)
+            => File.WriteAllText(PathAccountFile, JsonConvert.SerializeObject(accounts));
+
+        private static void ClearAccounts()
+            => File.Delete(PathAccountFile);
     }
 
     public class Account
@@ -155,5 +163,6 @@ namespace Guard.Library
         public string Path { get; set; }
         public string Name { get; set; }
     }
+
 }
 
