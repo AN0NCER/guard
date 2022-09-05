@@ -97,72 +97,18 @@ namespace Guard.Library
 
     public static class TestIO
     {
+        // Хочу сделать класс с Observalcollection для возможности управление очередностью показа аккаунтов
         /// <summary>
         /// Path to Folder save guard files
         /// </summary>
-        public static string PathGuardFile { get; private set; } =
+        /*public static string PathGuardFile { get; private set; } =
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
 
         public static string PathAccountFile { get; private set; } =
             PathGuardFile + "accounts.json";
 
         public static string ExtensionGuardFile { get; private set; } =
-            ".guard";
-
-        private static List<Account> _accounts = null;
-
-        public static List<Account> Accounts
-        {
-            get
-            {
-                if (_accounts == null)
-                    _accounts = GetAccounts();
-                return _accounts;
-            }
-            set
-            {
-                _accounts = value;
-            }
-        }
-
-        private static List<Account> GetAccounts()
-        {
-            List<Account> accounts = new List<Account>();
-            if (File.Exists(PathAccountFile))
-                accounts = JsonConvert.DeserializeObject<List<Account>>(File.ReadAllText(PathAccountFile));
-
-            if (!Directory.Exists(PathGuardFile))
-                Directory.CreateDirectory(PathGuardFile);
-
-            Directory.GetFiles(PathGuardFile, $"*{ExtensionGuardFile}").ForEach<string>((x) =>
-            {
-                if(!accounts.Exists( e => Path.GetFileNameWithoutExtension(e.Path) == Path.GetFileNameWithoutExtension(x)))
-                    accounts.Add(AddToList(x));
-            });
-
-            UpdateAccounts(accounts);
-
-            return accounts;
-        }
-
-        private static Account AddToList(string file)
-        {
-            SteamGuardAccount guardAccount = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(file));
-            return new Account { Path = file, Name = guardAccount.AccountName };
-        }
-
-        private static void UpdateAccounts(List<Account> accounts)
-            => File.WriteAllText(PathAccountFile, JsonConvert.SerializeObject(accounts));
-
-        private static void ClearAccounts()
-            => File.Delete(PathAccountFile);
+            ".guard";*/
     }
-
-    public class Account
-    {
-        public string Path { get; set; }
-        public string Name { get; set; }
-    }
-
 }
 
