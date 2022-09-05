@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Newtonsoft.Json;
+using SteamAuth;
+using Xamarin.Essentials;
+using Xamarin.Forms.Internals;
 
 namespace Guard.Library
 {
@@ -94,7 +97,57 @@ namespace Guard.Library
 
     public static class TestIO
     {
+        /// <summary>
+        /// Path to Folder save guard files
+        /// </summary>
+        public static string PathGuardFile { get; private set; } =
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
 
+        public static string PathAccountFile { get; private set; } =
+            PathGuardFile + "accounts.json";
+
+        public static string ExtensionGuardFile { get; private set; } =
+            ".guard";
+
+        private static List<Account> _accounts = null;
+
+        public static List<Account> Accounts
+        {
+            get
+            {
+                if (_accounts == null)
+                    _accounts = GetAccounts();
+                return _accounts;
+            }
+            set
+            {
+                _accounts = value;
+            }
+        }
+
+        private static List<Account> GetAccounts()
+        {
+            List<Account> accounts = new List<Account>();
+            if (File.Exists(PathAccountFile))
+                accounts = JsonConvert.DeserializeObject<List<Account>>(File.ReadAllText(PathAccountFile));
+
+            if (!Directory.Exists(PathGuardFile))
+                Directory.CreateDirectory(PathGuardFile);
+
+            Directory.GetFiles(PathGuardFile, $"*{ExtensionGuardFile}").ForEach<string>((x) =>
+            {
+                if(!accounts.Exists( e => e.Path == x))
+                    accounts.Add(AddToList(x));
+            });
+
+            return accounts;
+        }
+
+        private static Account AddToList(string file)
+        {
+            SteamGuardAccount guardAccount = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(file));
+            return new Account { Path = file, Name = guardAccount.AccountName };
+        }
     }
 
     public class Account
