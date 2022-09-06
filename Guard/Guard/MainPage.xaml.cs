@@ -62,7 +62,7 @@ namespace Guard
             IO.Files.ForEach(x =>
             {
                 //Adding guards list account
-                Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
+                Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(IO.PathGuardFile + x.Path)));
             });
 
             new Thread(AddItemViews).Start();
@@ -110,7 +110,7 @@ namespace Guard
             if (!answer && refreshSession)
                 return;
 
-            answer = IO.RemoveFileByName(CurGuard.AccountName);
+            answer = IO.Remove.ByName(CurGuard.AccountName);
 
             if (!answer)
                 return;
@@ -180,14 +180,14 @@ namespace Guard
         /// </summary>
         void UpdateListAccounts()
         {
-            IO.UpdateFiles();
+            IO.Update();
             if (IO.Files.Count > Guards.Count)
             {
                 UGuard addGuard = null;
 
                 IO.Files.ForEach(x =>
                 {
-                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x));
+                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(IO.GetFileByName(x.Name)));
 
                     Guards.ForEach(x =>
                     {
