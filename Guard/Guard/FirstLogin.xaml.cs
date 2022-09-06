@@ -77,7 +77,7 @@ namespace Guard
                 return;
             }
 
-            var write = IO.AddAndWrite(linker.LinkedAccount.AccountName,
+            var write = TestIO.Add.Files(linker.LinkedAccount.AccountName,
                 JsonConvert.SerializeObject(linker.LinkedAccount, Formatting.Indented));
 
             if (!write)
@@ -139,17 +139,17 @@ namespace Guard
                 if (String.IsNullOrEmpty(steamGuard.AccountName))
                     return;
 
-                if (File.Exists(IO.GetFileByName(steamGuard.AccountName)))
+                if (File.Exists(TestIO.GetFileByName(steamGuard.AccountName)))
                 {
                     bool answer = await DisplayAlert("Replace?", $"An account with the same name ({steamGuard.AccountName}) already exists. Do you want to replace?", "Yes", "No");
 
                     if (!answer)
                         return;
 
-                    IO.RemoveFileByName(steamGuard.AccountName);
+                    TestIO.Remove.ByName(steamGuard.AccountName);
                 }
 
-                IO.AddAndWrite(steamGuard.AccountName, JsonConvert.SerializeObject(steamGuard));
+                TestIO.Add.Files(steamGuard.AccountName, JsonConvert.SerializeObject(steamGuard));
                 NextPage();
             }
             catch (Exception ex)

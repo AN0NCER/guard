@@ -56,13 +56,13 @@ namespace Guard
         /// </summary>
         void ParseGuardFiles()
         {
-            if (IO.Files.Count <= 0)
+            if (TestIO.Files.Count <= 0)
                 return; //Exit Program. Somewhere it looks like a bug in the code;
 
-            IO.Files.ForEach(x =>
+            TestIO.Files.ForEach(x =>
             {
                 //Adding guards list account
-                Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
+                Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(TestIO.PathGuardFile + x.Path)));
             });
 
             new Thread(AddItemViews).Start();
@@ -90,7 +90,7 @@ namespace Guard
             if (TGUARD != null)
                 TGUARD.Abort();
 
-            string content = File.ReadAllText(IO.GetFileByName(CurGuard.AccountName));
+            string content = File.ReadAllText(TestIO.GetFileByName(CurGuard.AccountName));
             _guardAccount = JsonConvert.DeserializeObject<SteamGuardAccount>(content);
 
             TGUARD = new Thread(GuardSecretCode);
@@ -110,7 +110,7 @@ namespace Guard
             if (!answer && refreshSession)
                 return;
 
-            answer = IO.RemoveFileByName(CurGuard.AccountName);
+            answer = TestIO.Remove.ByName(CurGuard.AccountName);
 
             if (!answer)
                 return;
@@ -158,7 +158,7 @@ namespace Guard
         //Share Secret File
         async void ShareFile_Clicked(System.Object sender, System.EventArgs e)
         {
-            string filePath = IO.GetFileByName(_guardAccount.AccountName);
+            string filePath = TestIO.GetFileByName(_guardAccount.AccountName);
 
             if (!File.Exists(filePath))
                 return;
@@ -180,14 +180,14 @@ namespace Guard
         /// </summary>
         void UpdateListAccounts()
         {
-            IO.UpdateFiles();
-            if (IO.Files.Count > Guards.Count)
+            TestIO.Update();
+            if (TestIO.Files.Count > Guards.Count)
             {
                 UGuard addGuard = null;
 
-                IO.Files.ForEach(x =>
+                TestIO.Files.ForEach(x =>
                 {
-                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x));
+                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(TestIO.GetFileByName(x.Name)));
 
                     Guards.ForEach(x =>
                     {

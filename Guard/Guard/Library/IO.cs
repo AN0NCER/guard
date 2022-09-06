@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using SteamAuth;
@@ -10,31 +13,22 @@ using Xamarin.Forms.Internals;
 
 namespace Guard.Library
 {
-    public static class IO
+    public static class TestIO
     {
-        /// <summary>
-        /// Path to Folder save guard files
-        /// </summary>
-        public static string PathGuardFile { get; private set; } =
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
+        public static string PathGuardFile { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
+        public static string ExtensionGuardFile { get; private set; } = ".guard";
 
-        /// <summary>
-        /// Guard files Extension
-        /// </summary>
-        public static string ExtensionGuardFile { get; private set; } =
-            ".guard";
-
-        private static List<string> _files = null;
-
-        /// <summary>
-        /// Return Guard Files
-        /// </summary>
-        public static List<string> Files
+        private static void _files_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => Account.Save(_files);
+        private static ObservableCollection<AFile> _files = null;
+        public static ObservableCollection<AFile> Files
         {
             get
             {
                 if (_files == null)
+                {
                     _files = GetFiles();
+                    _files.CollectionChanged += _files_CollectionChanged;
+                }
                 return _files;
             }
             set
@@ -43,36 +37,24 @@ namespace Guard.Library
             }
         }
 
-        private static List<string> GetFiles()
+        private static ObservableCollection<AFile> GetFiles()
         {
-            List<string> files = new List<string>();
+            var files = new ObservableCollection<AFile>();
+            if (Account.Exists())
+                return Account.Load();
 
             if (!Directory.Exists(PathGuardFile))
                 Directory.CreateDirectory(PathGuardFile);
 
-            //Return files only specifd extension
-            files = Directory.GetFiles(PathGuardFile, $"*{ExtensionGuardFile}").ToList();
+            Directory.GetFiles(PathGuardFile, $"*{ExtensionGuardFile}").ToList().ForEach(e =>
+            {
+                SteamGuardAccount sga = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(e));
+                files.Add(new AFile { Name = sga.AccountName, Path = sga.AccountName + ExtensionGuardFile });
+            });
+
+            Account.Save(files);
 
             return files;
-        }
-
-        public static bool AddAndWrite(string name, string content)
-        {
-            if (!Directory.Exists(PathGuardFile))
-                Directory.CreateDirectory(PathGuardFile);
-
-            string file = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
-            try
-            {
-                File.WriteAllText(file, content);
-
-                if (_files == null)
-                    _files = GetFiles();
-
-                _files.Add(file);
-                return true;
-            }
-            catch (Exception ex) { return false; }
         }
 
         public static string GetFileByName(string name)
@@ -82,33 +64,122 @@ namespace Guard.Library
             return fileName;
         }
 
-        public static bool RemoveFileByName(string name)
+        private static bool Access()
         {
-            string fileName = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
-            if (!File.Exists(fileName))
-                return false;
+            var res = true;
 
-            try { File.Delete(fileName); UpdateFiles(); return true; } catch (Exception ex) { return false; }
-            
+
+            if (!Directory.Exists(PathGuardFile))
+                Directory.CreateDirectory(PathGuardFile);
+
+            if (Files == null)
+                res = false;
+
+            return res;
         }
 
-        public static void UpdateFiles() => _files = GetFiles();
+        public static void Update()
+        {
+            var files = GetFiles();
+
+            files.ForEach(x =>
+            {
+                if (!File.Exists(GetFileByName(x.Name)))
+                    files.Remove(x);
+            });
+
+            _files = files;
+        }
+
+        public static class Remove
+        {
+            public static void Files(string path)
+            {
+                if (!Access() || !File.Exists(path))
+                    return;
+
+                AFile aFile = _files.FirstOrDefault(x => x.Path == path);
+
+                if (aFile == null)
+                    return;
+
+                File.Delete(Path.Combine(PathGuardFile, path));
+
+                _files.Remove(aFile);
+            }
+
+            public static void Files(int index)
+            {
+                if (!Access() || _files.Count < 0 || index < 0 || index > (_files.Count - 1))
+                    return;
+
+                File.Delete(Path.Combine(PathGuardFile, _files[index].Path));
+                _files.RemoveAt(index);
+            }
+
+            public static bool ByName(string name)
+            {
+                if (!Access())
+                    return false;
+
+                AFile aFile = _files.FirstOrDefault(x => x.Name == name);
+
+                if (aFile == null)
+                    return false;
+
+                File.Delete(Path.Combine(PathGuardFile, aFile.Path));
+                _files.Remove(aFile);
+                return true;
+            }
+        }
+
+        public static class Add
+        {
+            public static void Files(string path)
+            {
+                if (!Access() || !File.Exists(path))
+                    return;
+
+                if (_files.FirstOrDefault(x => x.Path == path) != null)
+                    return;
+
+                SteamGuardAccount sga = JsonConvert.DeserializeObject<SteamGuardAccount>(File.ReadAllText(path));
+
+                File.WriteAllText(Path.Combine(PathGuardFile, (path = sga.AccountName + ExtensionGuardFile)), JsonConvert.SerializeObject(sga));
+
+                _files.Add(new AFile { Name = sga.AccountName, Path = path });
+            }
+
+            public static bool Files(string name, string content)
+            {
+                if (!Access())
+                    return false;
+
+                if (_files.FirstOrDefault(x => x.Name == name) != null)
+                    return false;
+
+                File.WriteAllText(Path.Combine(PathGuardFile, (name + ExtensionGuardFile)), content);
+
+                _files.Add(new AFile { Name = name, Path = (name + ExtensionGuardFile) });
+                return true;
+            }
+        }
     }
 
-    public static class TestIO
+    public static class Account
     {
-        // Хочу сделать класс с Observalcollection для возможности управление очередностью показа аккаунтов
-        /// <summary>
-        /// Path to Folder save guard files
-        /// </summary>
-        /*public static string PathGuardFile { get; private set; } =
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
+        public static string AccountFile { get; private set; } = TestIO.PathGuardFile + "accounts.json";
+        public static string Content() => File.ReadAllText(AccountFile);
+        public static void Remove() => File.Delete(AccountFile);
+        public static void Save(ObservableCollection<AFile> files) => File.WriteAllText(AccountFile, JsonConvert.SerializeObject(files));
+        public static ObservableCollection<AFile> Load() => JsonConvert.DeserializeObject<ObservableCollection<AFile>>(Content());
+        public static bool Exists() => File.Exists(AccountFile);
+    }
 
-        public static string PathAccountFile { get; private set; } =
-            PathGuardFile + "accounts.json";
-
-        public static string ExtensionGuardFile { get; private set; } =
-            ".guard";*/
+    public class AFile
+    {
+        public string Name { get; set; }
+        public string Path { get; set; }
     }
 }
 
