@@ -10,7 +10,7 @@
     <StackLayout Orientation="Vertical" Margin="10">
         <StackLayout Orientation="Horizontal" Margin="10,5">
             <Image Source="listText.png" WidthRequest="16" HeightRequest="16" />
-            <Label Margin="10,0,0,0" Text="Account list" TextColor="White" FontSize="18" />
+            <Label Margin="10,0,0,0" Text="Account list" TextColor="White" FontSize="16" />
 
         </StackLayout>
         <CollectionView x:Name="PositionAccounts">
