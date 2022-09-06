@@ -151,5 +151,7 @@
     <BundleResource Include="Resources\swap.png" />
     <BundleResource Include="Resources\iconFile.png" />
     <BundleResource Include="Resources\setting.png" />
+    <BundleResource Include="Resources\drag.png" />
+    <BundleResource Include="Resources\listText.png" />
   </ItemGroup>
 </Project>
