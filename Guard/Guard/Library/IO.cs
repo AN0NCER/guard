@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using SteamAuth;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
 
@@ -189,10 +190,27 @@ namespace Guard.Library
         public static bool Exists() => File.Exists(AccountFile);
     }
 
-    public class AFile
+    public class AFile : ObservableObject
     {
         public string Name { get; set; }
         public string Path { get; set; }
+
+        [JsonIgnore]
+        private bool _isBeingDragged;
+        [JsonIgnore]
+        public bool IsBeingDragged
+        {
+            get { return _isBeingDragged; }
+            set { SetProperty(ref _isBeingDragged, value); }
+        }
+        [JsonIgnore]
+        private bool _isBeingDraggedOver;
+        [JsonIgnore]
+        public bool IsBeingDraggedOver
+        {
+            get { return _isBeingDraggedOver; }
+            set { SetProperty(ref _isBeingDraggedOver, value); }
+        }
     }
 }
 
