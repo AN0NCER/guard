@@ -32,6 +32,7 @@
 - [X] Page Trade ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [ ] Page Trade Information
 - [X] Page Add Account ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
+- [ ] Page Settings
 
 Below are screenshots from IOS, more can be found in [**Figma**](https://www.figma.com/file/NCcKHjj30Wh1UrKvqnby0C/Guard?node-id=0%3A1)
 
