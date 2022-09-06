@@ -14,7 +14,7 @@ namespace Guard
 
             Page page = new MainPage();
 
-            if (TestIO.Files.Count <= 0)
+            if (IO.Files.Count <= 0)
                 page = new FirstLogin();
 
             ToPage(page);

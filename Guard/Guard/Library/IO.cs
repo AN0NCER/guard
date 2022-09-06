@@ -13,7 +13,7 @@ using Xamarin.Forms.Internals;
 
 namespace Guard.Library
 {
-    public static class TestIO
+    public static class IO
     {
         public static string PathGuardFile { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/acc/";
         public static string ExtensionGuardFile { get; private set; } = ".guard";
@@ -181,7 +181,7 @@ namespace Guard.Library
 
     public static class Account
     {
-        public static string AccountFile { get; private set; } = TestIO.PathGuardFile + "accounts.json";
+        public static string AccountFile { get; private set; } = IO.PathGuardFile + "accounts.json";
         public static string Content() => File.ReadAllText(AccountFile);
         public static void Remove() => File.Delete(AccountFile);
         public static void Save(ObservableCollection<AFile> files) => File.WriteAllText(AccountFile, JsonConvert.SerializeObject(files));
