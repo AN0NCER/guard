@@ -57,12 +57,7 @@ namespace Guard.Library
             return files;
         }
 
-        public static string GetFileByName(string name)
-        {
-            string fileName = Path.Combine(PathGuardFile, name + ExtensionGuardFile);
-
-            return fileName;
-        }
+        public static string GetFileByName(string name) => Path.Combine(PathGuardFile, name + ExtensionGuardFile);
 
         private static bool Access()
         {
@@ -82,10 +77,19 @@ namespace Guard.Library
         {
             var files = GetFiles();
 
-            files.ForEach(x =>
+            List<string> listFiles = Directory.GetFiles(PathGuardFile, $"*{ExtensionGuardFile}").ToList();
+
+            listFiles.ForEach(e =>
             {
-                if (!File.Exists(GetFileByName(x.Name)))
-                    files.Remove(x);
+                AFile aFile = files.FirstOrDefault(x => GetFileByName(x.Name) == e);
+                if (aFile == null)
+                    Add.Files(e);
+            });
+
+            files.ForEach(e =>
+            {
+                if (!File.Exists(GetFileByName(e.Name)))
+                    Remove.Files(e);
             });
 
             _files = files;
@@ -115,6 +119,15 @@ namespace Guard.Library
 
                 File.Delete(Path.Combine(PathGuardFile, _files[index].Path));
                 _files.RemoveAt(index);
+            }
+
+            public static void Files(AFile aFile)
+            {
+                if (!Access())
+                    return;
+
+                File.Delete(Path.Combine(PathGuardFile, aFile.Path));
+                _files.Remove(aFile);
             }
 
             public static bool ByName(string name)
