@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using Guard.CData;
 using SteamAuth;
@@ -34,7 +35,7 @@ namespace Guard
             MarketName = uTrade.Response.Descriptions[0].MarketName;
             Appid = uTrade.Response.Descriptions[0].Appid;
             Type = uTrade.Response.Descriptions[0].Type;
-            DescriptionValue = uTrade.Response.Descriptions[0].Descriptions[0].Value;
+            DescriptionValue = uTrade.Response.Descriptions[0].Descriptions.FirstOrDefault(x => x.Type == "text" && !String.IsNullOrEmpty(x.Value) && x.Value != " ").Value;
             Tags(uTrade.Response.Descriptions[0].Tags);
             TradeOfferState = GetStatus(uTrade.Response.Offer);
             IconUrl = uTrade.Response.Descriptions[0].IconUrl;
