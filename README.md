@@ -30,9 +30,9 @@
 - [X] Page Guard  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] View Item Controls  ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Page Trade ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
-- [ ] Page Trade Information
+- [X] Page Trade Information ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple)
 - [X] Page Add Account ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
-- [ ] Page Settings
+- [X] Page Settings ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple)
 
 Below are screenshots from IOS, more can be found in [**Figma**](https://www.figma.com/file/NCcKHjj30Wh1UrKvqnby0C/Guard?node-id=0%3A1)
 
