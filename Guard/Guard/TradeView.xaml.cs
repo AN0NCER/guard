@@ -5,14 +5,15 @@ using System.Threading;
 using Guard.CData;
 using SteamAuth;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 
 namespace Guard
 {
     public partial class TradeView : ContentView
     {
-        SteamGuardAccount _guardAccount { get; set; } // Guard Account
-        IEconService _econService { get; set; } //Trade Functions
-        ISteamUser _steamUser { get; set; } //Steam User Information
+        private SteamGuardAccount _guardAccount; // Guard Account
+        private IEconService _econService; //Trade Functions
+        private ISteamUser _steamUser; //Steam User Information
 
 
         public ObservableCollection<UTrade> Confirmations { get; set; } = new ObservableCollection<UTrade>();
@@ -24,11 +25,21 @@ namespace Guard
             _guardAccount = uGuard;
             _econService = new IEconService(_guardAccount.Session);
             _steamUser = new ISteamUser(_guardAccount.Session);
-            new Thread(RefreshConfirmations).Start();
+            RefreshTrade.IsRefreshing = true;
         }
 
-        void ClickGestureRecognizer_Clicked(System.Object sender, System.EventArgs e)
+        async void ClickGestureRecognizer_Clicked(System.Object sender, System.EventArgs e)
         {
+            PancakeView item = sender as PancakeView;
+            UTrade trade = item.BindingContext as UTrade;
+            var navigationPage = new NavigationPage(new TradeInfo(trade, ref _guardAccount));
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SetModalPresentationStyle(
+                    navigationPage.On<Xamarin.Forms.PlatformConfiguration.iOS>(),
+                    Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
+            }
+            await Navigation.PushModalAsync(navigationPage);
         }
 
         void RefreshView_Refreshing(System.Object sender, System.EventArgs e)
@@ -56,7 +67,6 @@ namespace Guard
 
         void RefreshConfirmations()
         {
-            Dispatcher.BeginInvokeOnMainThread(() => RefreshTrade.IsRefreshing = true);
             Confirmations.Clear();
             bool refreshing = _guardAccount.RefreshSession();
             if (!refreshing)

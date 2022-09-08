@@ -78,6 +78,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TackticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -150,5 +151,10 @@
     <BundleResource Include="Resources\steam.png" />
     <BundleResource Include="Resources\swap.png" />
     <BundleResource Include="Resources\iconFile.png" />
+    <BundleResource Include="Resources\setting.png" />
+    <BundleResource Include="Resources\drag.png" />
+    <BundleResource Include="Resources\listText.png" />
+    <BundleResource Include="Resources\launchBG.png" />
+    <BundleResource Include="Resources\shield.png" />
   </ItemGroup>
 </Project>

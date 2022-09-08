@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing" xmlns:library="clr-namespace:Guard.Library"
+    NavigationPage.HasNavigationBar="False"
+    x:Class="Guard.SettingPage" BackgroundColor="#1C202C">
+    <StackLayout Orientation="Vertical" Margin="10">
+        <StackLayout Orientation="Horizontal" Margin="10,5">
+            <Image Source="listText.png" WidthRequest="16" HeightRequest="16" />
+            <Label Margin="10,0,0,0" Text="Account list" TextColor="White" FontSize="16" />
+
+        </StackLayout>
+        <CollectionView x:Name="PositionAccounts">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout
+                        Padding="0, 5"
+                        x:DataType="library:AFile">
+                        <StackLayout.GestureRecognizers>
+                            <DropGestureRecognizer
+                                AllowDrop="True"
+                                DragLeaveCommand="{Binding BindingContext.ItemDragLeave, Source={x:Reference PositionAccounts}}"
+                                DragLeaveCommandParameter="{Binding}"
+                                DragOverCommand="{Binding BindingContext.ItemDraggedOver, Source={x:Reference PositionAccounts}}"
+                                DragOverCommandParameter="{Binding}"
+                                DropCommand="{Binding BindingContext.ItemDropped, Source={x:Reference PositionAccounts}}"
+                                DropCommandParameter="{Binding}" />
+                        </StackLayout.GestureRecognizers>
+                        <Frame Padding="0" IsVisible="{Binding IsBeingDraggedOver}" BackgroundColor="Transparent" Margin="0" CornerRadius="7" IsClippedToBounds="True" HasShadow="False">
+                            <yummy:PancakeView
+                            BackgroundColor="#454E6C"
+                            HeightRequest="45">
+                                <Grid Margin="24, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <yummy:PancakeView Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" BackgroundColor="#7D8AB7" CornerRadius="5" HeightRequest="16" WidthRequest="100" />
+                                    <yummy:PancakeView Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="#7D8AB7" CornerRadius="5" HeightRequest="16" WidthRequest="16" />
+                                </Grid>
+                            </yummy:PancakeView>
+                        </Frame>
+                        <Frame Padding="0" BackgroundColor="Transparent" Margin="0" CornerRadius="7" IsClippedToBounds="True" HasShadow="False">
+                            <yummy:PancakeView HeightRequest="45" Background="#30354A" >
+                                <Grid Margin="24, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                    Grid.Column="0"
+                                    FontSize="14"
+                                    HeightRequest="45"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding Name}"
+                                    TextColor="White"
+                                    VerticalTextAlignment="Center" />
+                                    <Image Source="drag.png" WidthRequest="16" HeightRequest="16" Grid.Column="1" />
+                                </Grid>
+                                <yummy:PancakeView.GestureRecognizers>
+                                    <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStartingCommand="{Binding BindingContext.ItemDragged, Source={x:Reference PositionAccounts}}"
+                                    DragStartingCommandParameter="{Binding}" />
+                                </yummy:PancakeView.GestureRecognizers>
+                            </yummy:PancakeView>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Reset Accounts" x:Name="ResetBTN" Clicked="ResetBTN_Clicked" BackgroundColor="#30354A" TextColor="#fff" />
+        <Label Text="Tip: You need to restart the program for the changes to take effect." TextColor="#50ffffff" FontSize="12" />
+    </StackLayout>
+</ContentPage>
