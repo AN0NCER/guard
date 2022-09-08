@@ -67,6 +67,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -135,12 +136,6 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-    <PackageReference Include="ZXing.Net.Mobile.Forms">
-      <Version>2.4.1</Version>
-    </PackageReference>
-    <PackageReference Include="ZXing.Net.Mobile">
-      <Version>2.4.1</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -157,5 +152,9 @@
     <BundleResource Include="Resources\swap.png" />
     <BundleResource Include="Resources\iconFile.png" />
     <BundleResource Include="Resources\setting.png" />
+    <BundleResource Include="Resources\drag.png" />
+    <BundleResource Include="Resources\listText.png" />
+    <BundleResource Include="Resources\launchBG.png" />
+    <BundleResource Include="Resources\shield.png" />
   </ItemGroup>
 </Project>

@@ -77,7 +77,7 @@ namespace Guard
                 return;
             }
 
-            var write = IO.AddAndWrite(linker.LinkedAccount.AccountName,
+            var write = IO.Add.Files(linker.LinkedAccount.AccountName,
                 JsonConvert.SerializeObject(linker.LinkedAccount, Formatting.Indented));
 
             if (!write)
@@ -146,10 +146,10 @@ namespace Guard
                     if (!answer)
                         return;
 
-                    IO.RemoveFileByName(steamGuard.AccountName);
+                    IO.Remove.ByName(steamGuard.AccountName);
                 }
 
-                IO.AddAndWrite(steamGuard.AccountName, JsonConvert.SerializeObject(steamGuard));
+                IO.Add.Files(steamGuard.AccountName, JsonConvert.SerializeObject(steamGuard));
                 NextPage();
             }
             catch (Exception ex)

@@ -18,10 +18,11 @@ using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
 using System.Windows.Input;
 using Guard.Interface;
+using System.Runtime.CompilerServices;
 
 namespace Guard
 {
-    public partial class MainPage : ContentPage, INotifyPropertyChanged
+    public partial class MainPage : ContentPage, INotifyPropertyChanged, IAccountMove
     {
         Thread TGUARD; // Thread update Guard Code
 
@@ -62,7 +63,7 @@ namespace Guard
             IO.Files.ForEach(x =>
             {
                 //Adding guards list account
-                Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x)));
+                Guards.Add(JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(IO.PathGuardFile + x.Path)));
             });
 
             new Thread(AddItemViews).Start();
@@ -110,7 +111,7 @@ namespace Guard
             if (!answer && refreshSession)
                 return;
 
-            answer = IO.RemoveFileByName(CurGuard.AccountName);
+            answer = IO.Remove.ByName(CurGuard.AccountName);
 
             if (!answer)
                 return;
@@ -169,13 +170,7 @@ namespace Guard
                 File = new ShareFile(filePath)
             });
         }
-
-/// <summary>
-/// /
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
-
+        
         private void NavigationPage_Disappearing(object sender, EventArgs e)
         {
             new Thread(UpdateListAccounts).Start();
@@ -186,14 +181,14 @@ namespace Guard
         /// </summary>
         void UpdateListAccounts()
         {
-            IO.UpdateFiles();
+            IO.Update();
             if (IO.Files.Count > Guards.Count)
             {
                 UGuard addGuard = null;
 
                 IO.Files.ForEach(x =>
                 {
-                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(x));
+                    UGuard tmpGuard = JsonConvert.DeserializeObject<UGuard>(File.ReadAllText(IO.GetFileByName(x.Name)));
 
                     Guards.ForEach(x =>
                     {
@@ -211,9 +206,7 @@ namespace Guard
             }
         }
 
-
         bool IsAnimate = false;
-
 
         //Show Trade Control
         void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
@@ -275,10 +268,9 @@ namespace Guard
         //Adding new Account or Export
         async void AddAuth_Clicked(System.Object sender, System.EventArgs e) => await LoadPageAsync(new FirstLogin(true));
 
-        private async Task LoadPageAsync(ContentPage contentPage)
+        async Task LoadPageAsync(ContentPage page)
         {
-
-            var navigationPage = new NavigationPage(contentPage);
+            var navigationPage = new NavigationPage(page);
             navigationPage.Disappearing += NavigationPage_Disappearing;
             if (Device.RuntimePlatform == Device.iOS)
             {
@@ -289,5 +281,11 @@ namespace Guard
             await Navigation.PushModalAsync(navigationPage);
         }
 
+        public void AccountMove(int a, int b)
+        {
+            Guards.Move(a, b);
+            ItemViewer.Children.Clear();
+            AddItemViews();
+        }
     }
 }

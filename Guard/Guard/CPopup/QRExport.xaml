@@ -1,0 +1,15 @@
+﻿<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing" Size="340,340"
+             x:Class="Guard.CPopup.QRExport" >
+    <xct:Popup.Content>
+        <Grid>
+            <zxing:ZXingBarcodeImageView BarcodeValue="Hello World"  BackgroundColor="Transparent" HeightRequest="340" WidthRequest="340">
+                <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                    <zxingcommon:EncodingOptions Height="340" Width="340"  />
+                </zxing:ZXingBarcodeImageView.BarcodeOptions>
+            </zxing:ZXingBarcodeImageView>
+        </Grid>
+    </xct:Popup.Content>
+</xct:Popup>
+
