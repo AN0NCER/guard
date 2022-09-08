@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#2F3548"
+    android:gravity="center">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:id="@+id/AccauntName"
+        android:textColor="#979AA3"
+        android:text="Logged in as user"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="52dp"
+        android:id="@+id/CodeBtn"
+        android:textColor="#979AA3"
+        android:background="#00FFFFFF"
+        android:text="00000"/>
+
+
+    <!--<ProgressBar 
+        android:progress="0"
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="5dp"/>-->
+
+
+</LinearLayout>

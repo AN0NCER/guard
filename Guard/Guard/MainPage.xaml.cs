@@ -170,7 +170,7 @@ namespace Guard
                 File = new ShareFile(filePath)
             });
         }
-
+        
         private void NavigationPage_Disappearing(object sender, EventArgs e)
         {
             new Thread(UpdateListAccounts).Start();
