@@ -21,8 +21,8 @@
 - [X] Authorization   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android)
 - [X] Disable Steam Guard from Steam Account   ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple) ![Android](https://img.shields.io/badge/android-blue?style=flat&logo=android) 
 - [X] Show Trades ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple)
-- [X] Accept Trade
-- [X] Decline Trade
+- [X] Accept Trade ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple)
+- [X] Decline Trade ![IOS](https://img.shields.io/badge/ios-light?style=flat&logo=apple)
 
 ## Design
 
