@@ -72,5 +72,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Reset Accounts" x:Name="ResetBTN" Clicked="ResetBTN_Clicked" BackgroundColor="#30354A" TextColor="#fff" />
+        <Label Text="Tip: You need to restart the program for the changes to take effect." TextColor="#50ffffff" FontSize="12" />
     </StackLayout>
 </ContentPage>

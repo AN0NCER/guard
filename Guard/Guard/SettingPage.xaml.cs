@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms.Internals;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Guard
 {
@@ -82,6 +83,15 @@ namespace Guard
 
             IO.Files.Move(itemAtIndex, insertAtIndex);
             /*PrintItemsState();*/
+
+            var mp = (IAccountMove)Application.Current.MainPage;
+            if(mp != null)
+                mp.AccountMove(itemAtIndex, insertAtIndex);
+        }
+
+        void ResetBTN_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Account.Remove();
         }
     }
 }

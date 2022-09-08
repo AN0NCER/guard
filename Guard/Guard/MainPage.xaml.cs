@@ -18,10 +18,11 @@ using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
 using System.Windows.Input;
 using Guard.Interface;
+using System.Runtime.CompilerServices;
 
 namespace Guard
 {
-    public partial class MainPage : ContentPage, INotifyPropertyChanged
+    public partial class MainPage : ContentPage, INotifyPropertyChanged, IAccountMove
     {
         Thread TGUARD; // Thread update Guard Code
 
@@ -205,9 +206,7 @@ namespace Guard
             }
         }
 
-
         bool IsAnimate = false;
-
 
         //Show Trade Control
         void TardeBtn_Clicked(System.Object sender, System.EventArgs e)
@@ -280,6 +279,13 @@ namespace Guard
                     Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle.PageSheet);
             }
             await Navigation.PushModalAsync(navigationPage);
+        }
+
+        public void AccountMove(int a, int b)
+        {
+            Guards.Move(a, b);
+            ItemViewer.Children.Clear();
+            AddItemViews();
         }
     }
 }
