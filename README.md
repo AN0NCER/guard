@@ -1,6 +1,6 @@
 ## It's done!
 
-**The Steam company has updated its application, now the application has support for multi-accounts, which loses the meaning of our ([@Ch-Tima](https://github.com/Ch-Tima) [@MaximKolpak](https://github.com/MaximKolpak) [@An0ncer](https://github.com/AN0NCER)) application **
+**The Steam company has updated its application, now the application has support for multi-accounts, which loses the meaning of our** ([@Ch-Tima](https://github.com/Ch-Tima) [@MaximKolpak](https://github.com/MaximKolpak) [@An0ncer](https://github.com/AN0NCER))<b> application </b>
 
 ![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-brightgreen)
 ![Release](https://img.shields.io/github/v/release/AN0NCER/guard)
